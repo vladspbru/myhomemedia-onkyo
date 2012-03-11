@@ -10,7 +10,7 @@ Options::Options()
       port(60128),
       cmd("PWRQSTN"), //default request POWER state
       spy(0),
-      tmdelay(300)
+      tmdelay(200)
 {
 }
 

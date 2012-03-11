@@ -1,0 +1,17 @@
+*.obj
+*.o
+*.~*
+*.user
+Makefile
+Makefile.*
+*.Debug
+*.Release
+moc_*
+qrc_*
+ui_*
+*.a
+*.dll
+tmp
+debug
+release
+build

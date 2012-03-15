@@ -31,7 +31,7 @@ int main(int argc, char *argv[])
         if( opts.tmdelay > 0 )
             discover.discoveryOne( opts.tmdelay );
         else {
-            discover.discovery( 60*1000 );
+            discover.discovery( 70*1000 );
         }
     }
 

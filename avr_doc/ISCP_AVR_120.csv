@@ -1,0 +1,1048 @@
+Main-related Command Support List;;
+Code;Means;'TX-NR609
+(Ether)'
+"PWR" - System Power Command  ;;
+"00";sets System Standby;Yes
+"01";sets System On;Yes
+"QSTN";gets the System Power Status;Yes
+"AMT" - Audio Muting Command;;
+"00";sets Audio Muting Off;Yes
+"01";sets Audio Muting On;Yes
+"TG";sets Audio Muting Wrap-Around;Yes
+"QSTN";gets the Audio Muting State;Yes
+"SPA"/"SPB" - Speaker A/B Command;;
+"00";sets Speaker Off;No
+"01";sets Speaker On;No
+"UP";sets Speaker Switch Wrap-Around;No
+"QSTN";gets the Speaker State;No
+*1:SPA=MAIN A/SPB=MAIN B;;
+*2:SPA=Front A/SPB=Front B(Exclucive use);;
+"SPL" - Speaker Layout Command;;
+”SB";sets SurrBack Speaker ;No
+"FH";sets Front High Speaker / SurrBack+Front High Speakers;No
+"FW";sets Front Wide Speaker / SurrBack+Front Wide Speakers;No
+"HW";sets                                   Front High+Front Wide Speakers;No
+"UP";sets Speaker Switch Wrap-Around;No
+"QSTN";gets the Speaker State;No
+"MVL" - Master Volume Command ;;
+"00"-"64";Volume Level 0 – 100 ( In hexadecimal representation);Yes
+"00"-"50";Volume Level 0 – 80 ( In hexadecimal representation);No
+"UP";sets Volume Level Up;Yes
+"DOWN";sets Volume Level Down;Yes
+"UP1";sets Volume Level Up 1dB Step;No
+"DOWN1";sets Volume Level Down 1dB Step;No
+"QSTN";gets the Volume Level;Yes
+"TFR" - Tone(Front) Command;;
+"Bxx";Front Bass (xx is "-A"..."00"..."+A"[-10...0...+10 2 step];Yes
+"Txx";Front Treble (xx is "-A"..."00"..."+A"[-10...0...+10 2 step];Yes
+"BUP";sets Front Bass up(2 step);Yes
+"BDOWN";sets Front Bass down(2 step);Yes
+"TUP";sets Front Treble up(2 step);Yes
+"TDOWN";sets Front Treble down(2 step);Yes
+"QSTN";gets Front Tone ("BxxTxx");Yes
+"TFW" - Tone(Front Wide) Command;;
+"Bxx";Front Wide Bass (xx is "-A"..."00"..."+A"[-10...0...+10 2 step];No
+"Txx";Front Wide Treble (xx is "-A"..."00"..."+A"[-10...0...+10 2 step];No
+"BUP";sets Front Wide Bass up(2 step);No
+"BDOWN";sets Front Wide Bass down(2 step);No
+"TUP";sets Front Wide Treble up(2 step);No
+"TDOWN";sets Front Wide Treble down(2 step);No
+"QSTN";gets Front Wide Tone ("BxxTxx");No
+"TFH" - Tone(Front High) Command;;
+"Bxx";Front High Bass (xx is "-A"..."00"..."+A"[-10...0...+10 2 step];No
+"Txx";Front High Treble (xx is "-A"..."00"..."+A"[-10...0...+10 2 step];No
+"BUP";sets Front High Bass up(2 step);No
+"BDOWN";sets Front High Bass down(2 step);No
+"TUP";sets Front High Treble up(2 step);No
+"TDOWN";sets Front High Treble down(2 step);No
+"QSTN";gets Front High Tone ("BxxTxx");No
+"TCT" - Tone(Center) Command;;
+"Bxx";Center Bass (xx is "-A"..."00"..."+A"[-10...0...+10 2 step];No
+"Txx";Center Treble (xx is "-A"..."00"..."+A"[-10...0...+10 2 step];No
+"BUP";sets Center Bass up(2 step);No
+"BDOWN";sets Center Bass down(2 step);No
+"TUP";sets Center Treble up(2 step);No
+"TDOWN";sets Center Treble down(2 step);No
+"QSTN";gets Cetner Tone ("BxxTxx");No
+"TSR" - Tone(Surround) Command;;
+"Bxx";Surround Bass (xx is "-A"..."00"..."+A"[-10...0...+10 2 step];No
+"Txx";Surround Treble (xx is "-A"..."00"..."+A"[-10...0...+10 2 step];No
+"BUP";sets Surround Bass up(2 step);No
+"BDOWN";sets Surround Bass down(2 step);No
+"TUP";sets Surround Treble up(2 step);No
+"TDOWN";sets Surround Treble down(2 step);No
+"QSTN";gets Surround Tone ("BxxTxx");No
+"TSB" - Tone(Surround Back) Command;;
+"Bxx";Surround Back Bass (xx is "-A"..."00"..."+A"[-10...0...+10 2 step];No
+"Txx";Surround Back Treble (xx is "-A"..."00"..."+A"[-10...0...+10 2 step];No
+"BUP";sets Surround Back Bass up(2 step);No
+"BDOWN";sets Surround Back Bass down(2 step);No
+"TUP";sets Surround Back Treble up(2 step);No
+"TDOWN";sets Surround Back Treble down(2 step);No
+"QSTN";gets Surround Back Tone ("BxxTxx");No
+"TSW" - Tone(Subwoofer) Command;;
+"Bxx";Subwoofer Bass (xx is "-A"..."00"..."+A"[-10...0...+10 2 step];No
+"BUP";sets Subwoofer Bass up(2 step);No
+"BDOWN";sets Subwoofer Bass down(2 step);No
+"QSTN";gets Subwoofer Tone ("BxxTxx");No
+;;
+"SLP" - Sleep Set Command ;;
+“01”-“5A”;sets Sleep Time 1 - 90min ( In hexadecimal representation);Yes
+“OFF”;sets Sleep Time Off;Yes
+“UP”;sets Sleep Time Wrap-Around UP;Yes
+“QSTN”;gets The Sleep Time;Yes
+"SLC" - Speaker Level Calibration Command ;;
+“TEST”;TEST Key;Yes
+“CHSEL”;CH SEL Key;Yes
+“UP”;LEVEL + Key;Yes
+“DOWN”;LEVEL – KEY;Yes
+"SWL" - Subwoofer (temporary) Level Command ;;
+“-F”-"00"-"+C";sets Subwoofer Level -15dB - 0dB - +12dB;Yes
+“UP”;LEVEL + Key;Yes
+“DOWN”;LEVEL – KEY;Yes
+"QSTN";gets the Subwoofer Level;Yes
+"CTL" - Center (temporary) Level Command ;;
+“-C”-"00"-"+C";sets Center Level -12dB - 0dB - +12dB;Yes
+“UP”;LEVEL + Key;Yes
+“DOWN”;LEVEL – KEY;Yes
+"QSTN";gets the Subwoofer Level;Yes
+"DIF" - Display Information Command ;;
+"00";Display Program Format;No
+"01";Display Digital Input Position;No
+"02";Display Digital Format Position;No
+"03";Display Bass Level;No
+"04";Display Treble Level;No
+"DIF" - Display Mode Command ;;
+"00";sets Selector + Volume Display Mode;Yes
+"01";sets Selector + Listening Mode Display Mode;No
+"02";Display Digital Format(temporary display);Yes
+"03";Display Video Format(temporary display);Yes
+"TG";sets Display Mode Wrap-Around Up;Yes
+"QSTN";gets The Display Mode;Yes
+*1: Parameter Character is "UP";;
+"DIM" - Dimmer Level Command ;;
+"00";sets Dimmer Level "Bright";Yes
+"01";sets Dimmer Level "Dim";Yes
+"02";sets Dimmer Level "Dark";Yes
+"03";sets Dimmer Level "Shut-Off";No
+"08";sets Dimmer Level "Bright & LED OFF";Yes
+"DIM";sets Dimmer Level Wrap-Around Up;Yes
+"QSTN";gets The Dimmer Level;Yes
+"OSD" - Setup Operation Command ;;
+"MENU";Menu Key;Yes
+"UP";Up Key;Yes
+"DOWN";Down Key;Yes
+"RIGHT";Right Key;Yes
+"LEFT";Left Key;Yes
+"ENTER";Enter Key;Yes
+"EXIT";Exit Key;Yes
+"AUDIO";Audio Adjust Key;No
+"VIDEO";Video Adjust Key;No
+"HOME";Home Key;Yes
+"MEM" - Memory Setup Command ;;
+"STR";stores memory ;Yes
+"RCL";recalls memory;Yes
+"LOCK";locks memory ;Yes
+"UNLK";unlocks memory;Yes
+"IFA" - Audio Infomation Command;;
+"nnnnn:nnnnn";'Infomation of Audio(Same Immediate Display '','' is separator of infomations)';Yes
+"QSTN";gets Infomation of Audio;Yes
+when you send "DIF02", receiver will return this response.;;
+"IFV" - Video Infomation Command;;
+"nnnnn:nnnnn";'infomation of Video(Same Immediate Display '','' is separator of infomations)';Yes
+"QSTN";gets Infomation of Video;Yes
+when you send "DIF03", receiver will return this response.;;
+"SLI" - Input Selector Command ;;
+"00";sets VIDEO1    VCR/DVR;Yes
+"01";sets VIDEO2    CBL/SAT;Yes
+"02";sets VIDEO3    GAME/TV    GAME;Yes
+"03";sets VIDEO4    AUX1(AUX);Yes
+"04";sets VIDEO5    AUX2;No
+"05";sets VIDEO6    PC;Yes
+"06";sets VIDEO7;No
+"07";Hidden1;No
+"08";Hidden2;No
+"09";Hidden3;No
+"10";sets DVD          BD/DVD;Yes
+"20";sets TAPE(1)    TV/TAPE;No
+"21";sets TAPE2;No
+"22";sets PHONO;No
+"23";sets CD    TV/CD;Yes
+"24";sets FM;Yes
+"25";sets AM;Yes
+“26”;sets TUNER;Yes
+"27";sets MUSIC SERVER    P4S   DLNA*2;Yes*2
+"28";sets INTERNET RADIO           iRadio Favorite*3;Yes*3
+"29";sets USB/USB(Front);Yes
+"2A";sets USB(Rear);No
+"2B";sets NETWORK                      NET;Yes
+"2C";sets USB(toggle);Yes
+"40";sets Universal PORT;Yes
+"30";sets MULTI CH;No
+"31";sets XM*1;No
+"32";sets SIRIUS*1;No
+"UP";sets Selector Position Wrap-Around Up;Yes
+"DOWN";sets Selector Position Wrap-Around Down;Yes
+"QSTN";gets The Selector Position;Yes
+*1:Only available XM/SIRIUS Model;;
+;;
+"SLR" - RECOUT Selector Command ;;
+"00";sets VIDEO1;No
+"01";sets VIDEO2;No
+"02";sets VIDEO3;No
+"03";sets VIDEO4;No
+"04";sets VIDEO5;No
+"05";sets VIDEO6;No
+"06";sets VIDEO7;No
+"10";sets DVD;No
+"20";sets TAPE(1);No
+"21";sets TAPE2;No
+"22";sets PHONO;No
+"23";sets CD;No
+"24";sets FM;No
+"25";sets AM;No
+"26";sets TUNER;No
+"27";sets MUSIC SERVER;No
+"28";sets INTERNET RADIO;No
+"30";sets MULTI CH;No
+"31";sets XM;No
+"7F";sets OFF;No
+"80";sets SOURCE;No
+"QSTN";gets The Selector Position;No
+*1:REC/ZONE3;;
+ "SLA" - Audio Selector Command ;;
+"00";sets AUTO;No
+"01";sets MULTI-CHANNEL;No
+"02";sets ANALOG;Yes
+"03";sets iLINK;No
+"04";sets HDMI;Yes
+"05";sets COAX/OPT;Yes
+"06";sets BALANCE;No
+"07";sets ARC;Yes
+"UP";sets Audio Selector Wrap-Around Up;Yes
+"QSTN";gets The Audio Selector Status;Yes
+ "TGA" - 12V Trigger A Command ;;
+"00";sets 12V Trigger A Off;No
+"01";sets 12V Trigger A On;No
+ "TGB" - 12V Trigger B Command ;;
+"00";sets 12V Trigger B Off;No
+"01";sets 12V Trigger B On;No
+ "TGC" - 12V Trigger C Command ;;
+"00";sets 12V Trigger C Off;No
+"01";sets 12V Trigger C On;No
+TGA/TGB/TGC are available,when each 12V Trigger parameter is all "OFF" at Setup Menu.;;
+ "VOS" - Video Output Selector (Japanese Model Only);;
+"00";sets D4;No
+"01";sets Component;No
+"QSTN";gets The Selector Position;No
+ "HDO" - HDMI Output Selector;;
+"00";sets No                         Analog;No
+"01";sets Yes/Out Main        HDMI Main;No
+"02";sets Out Sub                HDMI Sub;No
+"03";sets                              Both;No
+"04";sets                              Both(Main);No
+"05";sets                              Both(Sub);No
+"UP";sets HDMI Out Selector Wrap-Around Up;No
+"QSTN";gets The HDMI Out Selector;No
+*1 except American Model;;
+ "HAO" -HDMI Audio Out;;
+"00";sets Off;Yes
+"01";sets On;Yes
+"02";sets Auto;Yes
+"UP";sets HDMI Audio Out Wrap-Around Up;Yes
+"QSTN";gets HDMI Audio Out;Yes
+ "RES" - Monitor Out Resolution;;
+"00";sets Through;Yes
+"01";sets Auto(HDMI Output Only);Yes
+"02";sets 480p;Yes
+"03";sets 720p;Yes
+"04";sets 1080i;Yes
+"05";sets 1080p(HDMI Output Only);Yes
+"07";sets 1080p/24fs(HDMI Output Only);No
+"08";sets 4K Upcaling(HDMI Output Only);Yes
+"06";sets Source;No
+"UP";sets Monitor Out Resolution Wrap-Around Up;Yes
+"QSTN";gets The Monitor Out Resolution;Yes
+"ISF" - ISF Mode;;
+"00";sets ISF Mode Custom;No
+"01";sets ISF Mode Day;No
+"02";sets ISF Mode Night;No
+"UP";sets ISF Mode State Wrap-Around Up;No
+"QSTN";gets The ISF Mode State;No
+ "VWM" - Video Wide Mode;;
+"00";sets Auto;Yes
+"01";sets 4:3;Yes
+"02";sets Full;Yes
+"03";sets Zoom;Yes
+"04";sets Wide Zoom;Yes
+"05";sets Smart Zoom;No
+"UP";sets Video Zoom Mode Wrap-Around Up;Yes
+"QSTN";gets Video Zoom Mode;Yes
+ "VPM" -Video Picture Mode;;
+"00";sets Through;Yes
+"01";sets Custom;Yes
+"02";sets Cinema;Yes
+"03";sets Game;Yes
+"05";sets ISF Day;No
+"06";sets ISF Night;No
+"07";sets Streaming;No
+"08";sets Direct;Yes
+"UP";sets Video Zoom Mode Wrap-Around Up;Yes
+"QSTN";gets Video Zoom Mode;Yes
+"LMD" - Listening Mode Command;;
+"00";sets STEREO;Yes
+"01";sets DIRECT ;Yes
+"02";sets SURROUND;Yes
+"03";sets FILM                                      Game-RPG;Yes
+"04";sets THX;Yes
+"05";sets ACTION                                 Game-Action;Yes
+"06";sets MUSICAL                               Game-Rock;Yes
+"07";sets MONO MOVIE;No
+"08";sets ORCHESTRA;Yes
+"09";sets UNPLUGGED;Yes
+"0A";sets STUDIO-MIX;Yes
+"0B";sets TV LOGIC;Yes
+"0C";sets ALL CH STEREO;Yes
+"0D";sets THEATER-DIMENSIONAL ;Yes
+"0E";sets ENHANCED 7/ENHANCE       Game-Sports;Yes
+"0F";sets MONO ;Yes
+"11";sets PURE AUDIO ;Yes*4
+"12";sets MULTIPLEX;No
+"13";sets FULL MONO;Yes
+"14";sets DOLBY VIRTUAL;No
+"15";sets DTS Surround Sensation;No
+"16";sets Audyssey DSX;Yes
+"1F";sets Whole House Mode;No
+"40";sets 5.1ch Surround;No
+"40";sets Straight Decode*1;Yes
+"41";sets Dolby EX/DTS ES;No
+"41";sets Dolby EX*2;Yes
+"42";sets THX Cinema;Yes
+"43";sets THX Surround EX;Yes
+"44";sets THX Music;Yes
+"45";sets THX Games;Yes
+"50";sets THX U2/S2/I/S Cinema/Cinema2;Yes
+"51";sets THX MusicMode,THX U2/S2/I/S Music;Yes
+"52";sets THX Games Mode,THX U2/S2/I/S Games;Yes
+"80";sets PLII/PLIIx Movie;Yes
+"81";sets PLII/PLIIx Music;Yes
+"82";sets Neo:6 Cinema/Neo:X Cinema;Yes
+"83";sets Neo:6 Music/Neo:X Music;Yes
+"84";sets PLII/PLIIx THX Cinema;Yes
+"85";sets Neo:6/Neo:X THX Cinema;Yes
+"86";sets PLII/PLIIx Game;Yes
+"87";sets Neural Surr*3;No
+"88";sets Neural THX/Neural Surround;No
+"89";sets PLII/PLIIx THX Games;Yes
+"8A";sets Neo:6/Neo:X THX Games;Yes
+"8B";sets PLII/PLIIx THX Music;Yes
+"8C";sets Neo:6/Neo:X THX Music;Yes
+"8D";sets Neural THX Cinema;No
+"8E";sets Neural THX Music;No
+"8F";sets Neural THX Games;No
+"90";sets PLIIz Height;Yes
+"91";sets Neo:6 Cinema DTS Surround Sensation;No
+"92";sets Neo:6 Music DTS Surround Sensation;No
+"93";sets Neural Digital Music;No
+"94";sets PLIIz Height + THX Cinema;Yes
+"95";sets PLIIz Height + THX Music;Yes
+"96";sets PLIIz Height + THX Games;Yes
+"97";sets PLIIz Height + THX U2/S2 Cinema;No
+"98";sets PLIIz Height + THX U2/S2 Music;No
+"99";sets PLIIz Height + THX U2/S2 Games;No
+"9A";sets Neo:X Game;No
+"A0";sets PLIIx/PLII Movie + Audyssey DSX;Yes
+"A1";sets PLIIx/PLII Music + Audyssey DSX;Yes
+"A2";sets PLIIx/PLII Game + Audyssey DSX;Yes
+"A3";sets Neo:6 Cinema + Audyssey DSX;No
+"A4";sets Neo:6 Music + Audyssey DSX;No
+"A5";sets Neural Surround + Audyssey DSX;No
+"A6";sets Neural Digital Music + Audyssey DSX;No
+"A7";sets Dolby EX + Audyssey DSX;No
+"UP";sets Listening Mode Wrap-Around Up;Yes
+"DOWN";sets Listening Mode Wrap-Around Down;Yes
+"MOVIE";sets Listening Mode Wrap-Around Up;Yes
+"MUSIC";sets Listening Mode Wrap-Around Up;Yes
+"GAME";sets Listening Mode Wrap-Around Up;Yes
+"QSTN";gets The Listening Mode;Yes
+"LTN" - Late Night Command ;;
+"00";sets Late Night Off;Yes
+"01";sets Late Night Low@DolbyDigital,On@Dolby TrueHD;Yes
+"02";sets Late Night High@DolbyDigital,(On@Dolby TrueHD);Yes
+"03";sets Late Night Auto@Dolby TrueHD;Yes
+"UP";sets Late Night State Wrap-Around Up;Yes
+"QSTN";gets The Late Night Level;Yes
+"RAS" - Re-EQ/Academy Filter Command ;;
+"00";sets Both Off;No
+"01";sets Re-EQ On;No
+"02";sets Academy On;No
+"UP";sets Re-EQ/Academy State Wrap-Around Up;No
+"QSTN";gets The Re-EQ/Academy State;No
+"RAS" - Re-EQ Command ;;
+"00";sets Re-EQ Off;Yes
+"01";sets Re-EQ On;Yes
+"UP";sets Re-EQ State Wrap-Around Up;Yes
+"QSTN";gets The Re-EQ State;Yes
+"RAS" - Cinema Filter Command ;;
+"00";sets Cinema Filter Off;No
+"01";sets Cinema Filter On;No
+"UP";sets Cinema Filter State Wrap-Around Up;No
+"QSTN";gets The Cinema Filter State;No
+"ADY" - Audyssey 2EQ/MultEQ/MultEQ XT;;
+"00";sets Audyssey 2EQ/MultEQ/MultEQ XT Off;Yes
+"01";sets Audyssey 2EQ/MultEQ/MultEQ XT On/Movie;Yes
+"02";sets Audyssey 2EQ/MultEQ/MultEQ XT Music;Yes
+"UP";sets Audyssey 2EQ/MultEQ/MultEQ XT State Wrap-Around Up;Yes
+"QSTN";gets The Audyssey 2EQ/MultEQ/MultEQ XT State;Yes
+"ADQ" - Audyssey Dynamic EQ;;
+"00";sets Audyssey Dynamic EQ Off;Yes
+"01";sets Audyssey Dynamic EQ On;Yes
+"UP";sets Audyssey Dynamic EQ State Wrap-Around Up;Yes
+"QSTN";gets The Audyssey Dynamic EQ State;Yes
+"ADV" - Audyssey Dynamic Volume;;
+"00";sets Audyssey Dynamic Volume Off;Yes
+"01";sets Audyssey Dynamic Volume Light;Yes
+"02";sets Audyssey Dynamic Volume Medium;Yes
+"03";sets Audyssey Dynamic Volume Heavy;Yes
+"UP";sets Audyssey Dynamic Volume State Wrap-Around Up;Yes
+"QSTN";gets The Audyssey Dynamic Volume State;Yes
+"DVL" - Dolby Volume;;
+"00";sets Dolby Volume Off;No
+"01";sets Dolby Volume Low/On;No
+"02";sets Dolby Volume Mid;No
+"03";sets Dolby Volume High;No
+"UP";sets Dolby Volume State Wrap-Around Up;No
+"QSTN";gets The Dolby Volume State;No
+"MOT" - Music Optimizer;;
+"00";sets Music Optimizer Off;Yes
+"01";sets Music Optimizer On;Yes
+"UP";sets Music Optimizer State Wrap-Around Up;Yes
+"QSTN";gets The Dolby Volume State;Yes
+*1 Newer than TX-SR805:Dolby Digital/DTS/AAC/DTS-ES/DTS 96/24/Dolby Digital Plus/True HD/DTS HD/DTS Master Audio acouding to input signal.;;
+*2 Newer than TX-SR805:if you want to change Listening Mode to DTS-ES,please use parameter "40".;;
+*3 Only Available North American Model;;
+"TUN" - Tuning Command (Include Tuner Pack Model Only);;
+"nnnnn";'sets Directly Tuning Frequency (FM nnn.nn MHz / AM nnnnn kHz / SR nnnnn ch)
+put 0 in the first two digits of nnnnn at SR';Yes
+"DIRECT";starts/restarts Direct Tuning Mode;Yes
+"0";sets 0 in Direct Tuning Mode;Yes
+"1";sets 1 in Direct Tuning Mode;Yes
+"2";sets 2 in Direct Tuning Mode;Yes
+"3";sets 3 in Direct Tuning Mode;Yes
+"4";sets 4 in Direct Tuning Mode;Yes
+"5";sets 5 in Direct Tuning Mode;Yes
+"6";sets 6 in Direct Tuning Mode;Yes
+"7";sets 7 in Direct Tuning Mode;Yes
+"8";sets 8 in Direct Tuning Mode;Yes
+"9";sets 9 in Direct Tuning Mode;Yes
+"UP";sets Tuning Frequency Wrap-Around Up;Yes
+"DOWN";sets Tuning Frequency Wrap-Around Down;Yes
+"QSTN";gets The Tuning Frequency;Yes
+Ex: FM 100.5 MHz(100/200kHz Step) Direct Tuning is [!1SLI24][!1TUNDIRECT][!1TUN1][!1TUN0][!1TUN0][!1TUN5];;
+Ex: FM 100.55 MHz(50kHz Step) Direct Tuning is [!1SLI24][!1TUNDIRECT][!1TUN1][!1TUN0][!1TUN0][!1TUN5][!1TUN5];;
+Ex: FM 90.0 MHz(100kHz Step) Direct Tuning is [!1SLI24][!1TUNDIRECT][!1TUN9][!1TUN0][!1TUN0];;
+Ex: FM 90.00 MHz(50kHz Step) Direct Tuning is [!1SLI24][!1TUNDIRECT][!1TUN9][!1TUN0][!1TUN0][!1TUN0];;
+Ex: AM 1230 kHz(10kHz Step) Direct Tuning is [!1SLI25][!1TUNDIRECT][!1TUN1][!1TUN2][!1TUN3];;
+Ex: AM 1341 kHz(9kHz Step) Direct Tuning is [!1SLI25][!1TUNDIRECT][!1TUN1][!1TUN3][!1TUN4][!1TUN1];;
+"PRS" - Preset Command (Include Tuner Pack Model Only);;
+"01"-"28";sets Preset No. 1 - 40 ( In hexadecimal representation);Yes
+"01"-"1E";sets Preset No. 1 - 30 ( In hexadecimal representation);No
+"UP";sets Preset No. Wrap-Around Up;Yes
+"DOWN";sets Preset No. Wrap-Around Down;Yes
+"QSTN";gets The Preset No.;Yes
+"PRM" - Preset Memory Command (Include Tuner Pack Model Only);;
+"01"-"28";sets Preset No. 1 - 40 ( In hexadecimal representation);Yes
+"01"-"1E";sets Preset No. 1 - 30 ( In hexadecimal representation);No
+"RDS" - RDS Information Command (RDS Model Only);;
+“00”;Display RT Information*1;Yes
+“01”;Display PTY Information;Yes
+“02”;Display TP Information;Yes
+“UP”;Display RDS Information Wrap-Around Change;Yes
+"PTS" - PTY Scan Command (RDS Model Only);;
+“00”-“1E”;sets PTY No “0 - 30” ( In hexadecimal representation);Yes
+“ENTER”;Finish PTY Scan;Yes
+"TPS" - TP Scan Command (RDS Model Only);;
+“”;Start TP Scan (When Don’t Have Parameter);Yes
+“ENTER”;Finish TP Scan;Yes
+"XCN" - XM Channel Name Info (XM Model Only);;
+"nnnnnnnnnn";XM Channel Name;No
+"QSTN";gets XM Channel Name;No
+"XAT" - XM Artist Name Info (XM Model Only);;
+"nnnnnnnnnn";XM Artist Name;No
+"QSTN";gets XM Artist Name;No
+"XTI" - XM Title Info (XM Model Only);;
+"nnnnnnnnnn";XM Title;No
+"QSTN";gets XM Title;No
+"XCH" - XM Channel Number Command (XM Model Only);;
+"000"-"255";XM Channel Number  “000 - 255” ;No
+"UP";sets XM Channel Wrap-Around Up;No
+"DOWN";sets XM Channel Wrap-Around Down;No
+"QSTN";gets XM Channel Number;No
+"XCT" - XM Category Command (XM Model Only);;
+"nnnnnnnnnn";XM Category Info;No
+"UP";sets XM Category Wrap-Around Up;No
+"DOWN";sets XM Category Wrap-Around Down;No
+"QSTN";gets XM Category;No
+"SCN" - SIRIUS Channel Name Info (SIRIUS Model Only);;
+"nnnnnnnnnn";SIRIUS Channel Name;No
+"QSTN";gets SIRIUS Channel Name;No
+"SAT" - SIRIUS Artist Name Info (SIRIUS Model Only);;
+"nnnnnnnnnn";SIRIUS Artist Name;No
+"QSTN";gets SIRIUS Artist Name;No
+"STI" - SIRIUS Title Info (SIRIUS Model Only);;
+"nnnnnnnnnn";SIRIUS Title;No
+"QSTN";gets SIRIUS Title;No
+"SCH" - SIRIUS Channel Number Command (SIRIUS Model Only);;
+"000"-"255";SIRIUS Channel Number  “000 - 255” ;No
+"UP";sets SIRIUS Channel Wrap-Around Up;No
+"DOWN";sets SIRIUS Channel Wrap-Around Down;No
+"QSTN";gets SIRIUS Channel Number;No
+"SCT" - SIRIUS Category Command (SIRIUS Model Only);;
+"nnnnnnnnnn";SIRIUS Category Info;No
+"UP";sets SIRIUS Category Wrap-Around Up;No
+"DOWN";sets SIRIUS Category Wrap-Around Down;No
+"QSTN";gets SIRIUS Category;No
+"SLK" - SIRIUS Parental Lock Command (SIRIUS Model Only);;
+"nnnn";Lock Password (4Digits);No
+"INPUT";displays "Please input the Lock password";No
+"WRONG";displays "The Lock password is wrong";No
+"HAT" - HD Radio Artist Name Info (HD Radio Model Only);;
+"nnnnnnnnnn";HD Radio Artist Name (variable-length, 64 digits max);No
+"QSTN";gets HD Radio Artist Name;No
+"HCN" - HD Radio Channel Name Info (HD Radio Model Only);;
+"nnnnnnnnnn";HD Radio Channel Name (Station Name) (7 digits);No
+"QSTN";gets HD Radio Channel Name;No
+"HTI" - HD Radio Title Info (HD Radio Model Only);;
+"nnnnnnnnnn";HD Radio Title (variable-length, 64 digits max);No
+"QSTN";gets HD Radio Title;No
+"HDS" - HD Radio Detail Info (HD Radio Model Only);;
+"nnnnnnnnnn";HD Radio Title;No
+"QSTN";gets HD Radio Title;No
+"HPR" - HD Radio Channel Program Command (HD Radio Model Only);;
+"01"-"08";sets directly HD Radio Channel Program;No
+"QSTN";gets HD Radio Channel Program;No
+"HBL" - HD Radio Blend Mode Command (HD Radio Model Only);;
+"00";sets HD Radio Blend Mode "Auto";No
+"01";sets HD Radio Blend Mode "Analog";No
+"QSTN";gets the HD Radio Blend Mode Status;No
+"HTS" - HD Radio Tuner Status (HD Radio Model Only);;
+"mmnnoo";'HD Radio Tuner Status (3 bytes)
+mm -> "00" not HD, "01" HD
+nn -> current Program "01"-"08"
+oo -> receivable Program (8 bits are represented in hexadecimal notation. Each bit shows receivable or not.) ';No
+"QSTN";gets the HD Radio Tuner Status;No
+The TUNER/XM/SIRIUS/HD Radio function is shared by the MAIN and ZONE side.;;
+*1:RDS information Command in RBDS Model, is only available Display RT information.;;
+;;
+"NTC" - Net-Tune Operation Command (Net-Tune Model Only before TX-NR1000);;
+"NTC" - Network/USB Operation Command (Network Model Only after TX-NR905);;
+"PLAY";PLAY KEY;Yes
+"STOP";STOP KEY;Yes
+"PAUSE";PAUSE KEY;Yes
+"TRUP";TRACK UP KEY;Yes
+"TRDN";TRACK DOWN KEY;Yes
+"FF";FF KEY (CONTINUOUS*);Yes
+"REW";REW KEY (CONTINUOUS*);Yes
+"REPEAT";REPEAT KEY;Yes
+"RANDOM";RANDOM KEY;Yes
+"DISPLAY";DISPLAY KEY;Yes
+"ALBUM";ALBUM KEY;No
+"ARTIST";ARTIST KEY;No
+"GENRE";GENRE KEY;No
+"PLAYLIST";PLAYLIST KEY;No
+"RIGHT";RIGHT KEY;Yes
+"LEFT";LEFT KEY;Yes
+"UP";UP KEY;Yes
+"DOWN";DOWN KEY;Yes
+"SELECT";SELECT KEY;Yes
+"0";0 KEY;Yes
+"1";1 KEY;Yes
+"2";2 KEY;Yes
+"3";3 KEY;Yes
+"4";4 KEY;Yes
+"5";5 KEY;Yes
+"6";6 KEY;Yes
+"7";7 KEY;Yes
+"8";8 KEY;Yes
+"9";9 KEY;Yes
+"DELETE";DELETE KEY;Yes
+"CAPS";CAPS KEY;Yes
+"LOCATION";LOCATION KEY;No
+"LANGUAGE";LANGUAGE KEY;No
+"SETUP";SETUP KEY;No
+"RETURN";RETURN KEY;Yes
+"CHUP";CH UP(for iRadio);Yes
+"CHDN";CH DOWN(for iRadio);Yes
+"MENU";MENU;Yes
+"TOP";TOP MENU;Yes
+"MODE";MODE(for iPod) STD<->EXT;Yes
+"LIST";LIST <-> PLAYBACK;Yes
+* FFW/REW Net-tune commands must be sent continuously, with no more than 100ms delay between codes;;
+"NAT" -NET/USB Artist Name Info;;
+"nnnnnnnnnn";NET/USB Artist Name (variable-length, 64 ASCII letters max);Yes
+"nnnnnnnnnn";NET/USB Artist Name (variable-length, 64 Unicode letters [UTF-8 encoded] max , for Network Control only);Yes
+"QSTN";gets iPod Artist Name;Yes
+"NAL" - NET/USB Album Name Info;;
+"nnnnnnn";NET/USB Album Name (variable-length, 64 ASCII letters max);Yes
+"nnnnnnn";NET/USB Album Name (variable-length, 64 Unicode letters [UTF-8 encoded] max , for Network Control only);Yes
+"QSTN";gets iPod Album Name;Yes
+"NTI" - NET/USB Title Name;;
+"nnnnnnnnnn";NET/USB Title Name (variable-length, 64 ASCII letters max);Yes
+"nnnnnnnnnn";NET/USB Title Name (variable-length, 64 Unicode letters [UTF-8 encoded] max , for Network Control only);Yes
+"QSTN";gets HD Radio Title;Yes
+"NTM" - NET/USB Time Info;;
+"mm:ss/mm:ss";NET/USB Time Info (Elapsed time/Track Time Max 99:59);Yes
+"QSTN";gets iPod Time Info;Yes
+"NTR" - NET/USB Track Info;;
+"cccc/tttt";NET/USB Track Info (Current Track/Toral Track Max 9999);Yes
+"QSTN";gets iPod Time Info;Yes
+"NST" - NET/USB Play Status;;
+"prs";'NET/USB Play Status (3 letters)
+p -> Play Status: "S": STOP, "P": Play, "p": Pause, "F": FF, "R": FR
+r -> Repeat Status: "-": Off, "R": All, "F": Folder, "1": Repeat 1,
+s -> Shuffle Status: "-": Off, "S": All , "A": Album, "F": Folder';Yes
+"QSTN";gets the Net/USB Status;Yes
+"NPR" - Internet Radio Preset Command;;
+"01"-"28";sets Preset No. 1 - 40 ( In hexadecimal representation);Yes
+"SET";preset memory current station;Yes
+"NLS" - NET/USB List Info;;
+"tlpnnnnnnnnnn";'NET/USB List Info
+t ->Information Type (A : ASCII letter, C : Cursor Info)
+when t = A,
+  l ->Line Info (0-9 : 1st to 10th Line)
+  nnnnnnnnn:Listed data (variable-length, 64 ASCII letters max)
+  when AVR is not displayed NET/USB List(Ketboard,Menu,Popup…), "nnnnnnnnn" is "See TV".
+  p ->Property (- : no)
+when t = C,
+  l ->Cursor Position (0-9 : 1st to 10th Line, - : No Cursor)
+  p ->Update Type (P : Page Infomation Update ( Page Clear or Disable List Info) , C : Cursor Position Update)';No
+"tlpnnnnnnnnnn";'NET/USB List Info
+t ->Information Type (A : ASCII letter, C : Cursor Info, U : Unicode letter)
+when t = A,
+  l ->Line Info (0-9 : 1st to 10th Line)
+  nnnnnnnnn:Listed data (variable-length, 64 ASCII letters max)
+    when AVR is not displayed NET/USB List(Ketboard,Menu,Popup…), "nnnnnnnnn" is "See TV".
+  p ->Property (- : no)
+when t = C,
+  l ->Cursor Position (0-9 : 1st to 10th Line, - : No Cursor)
+  p ->Update Type (P : Page Infomation Update ( Page Clear or Disable List Info) , C : Cursor Position Update)
+when t = U, (for Network Control Only)
+  l ->Line Info (0-9 : 1st to 10th Line)
+  nnnnnnnnn:Listed data (variable-length, 64 Unicode letters [UTF-8 encoded] max)
+    when AVR is not displayed NET/USB List(Ketboard,Menu,Popup…), "nnnnnnnnn" is "See TV".
+  p ->Property (- : no)';Yes
+"ti";'select the listed item (from Network Control Only)
+ t -> Index Type (L : Line, I : Index)
+when t = L,
+  i -> Line number (0-9 : 1st to 10th Line [1 digit] )
+when t = I,
+  iiiii -> Index number (00001-99999 : 1st to 99999th Item [5 digits] )';Yes
+"NJA" - NET/USB Jacket Art (When Jacket Art is available and Output for Network Control Only);;
+"tpxxxxxxxxxxxx";'NET/USB Jacket Art/Album Art Data
+t-> Image type 0:BMP,1:JPEG
+p-> Packet flag 0:Start, 1:Next, 2:End
+xxxxxxxxxxxxxx -> Jacket/Album Art Data (valiable length, 1024 ASCII HEX letters max)';Yes
+"NSV" - NET Service(for Network Control Only);;
+"ssiaaaa…aaaabbbb…bbbb";'select Network Service directly
+ss -> Network Serveice
+ 00:Media Server (DLNA)
+ 01:Favorite
+ 02:vTuner
+ 03:SIRIUS
+ 04:Pandora
+ 05:Rhapsody
+ 06:Last.fm
+ 07:Napster
+ 08:Slacker
+ 09:Mediafly
+ 0A:Spotify
+ 0C:Radiko
+ 0D:e-onkyo
+i-> Acount Info
+ 0: No
+ 1: Yes
+"aaaa...aaaa": User Name ( 128 Unicode letters [UTF-8 encoded] max )
+"bbbb...bbbb": Password ( 128 Unicode letters [UTF-8 encoded] max )';Yes
+;;
+"NKY" - NET Keyboard(for Network Control Only);;
+"ll";'waiting Keyboard Input
+ll -> category
+ 00: Off ( Exit Keyboard Input )
+ 01: User Name
+ 02: Password
+ 03: Artist Name
+ 04: Album Name
+ 05: Song Name
+ 06: Station Name
+ 07: Tag Name
+ 08: Artist or Song
+ 09: Episode Name
+ 0A: Pin Code (some digit Number [0-9])
+ 0B: User Name (available ISO 8859-1 character set)
+ 0C: Password (available ISO 8859-1 character set)';Yes
+"nnnnnnnnn";'set Keyboard Input letter
+"nnnnnnnn" is variable-length, 128 Unicode letters [UTF-8 encoded] max';Yes
+"NPU" - NET Popup Message(for Network Control Only);;
+"xaaa…aaaybbb…bbb";'x -> Popup Display Type
+ ''T'': Popup text is top
+ ''B'': Popup text is bottom
+ ''L'': Popup text is list format
+
+aaa...aaa -> Popup Title, Massage
+ when x = ''T'' or ''B''
+    Top Title [0x00] Popup Title [0x00] Popup Message [0x00]
+    (valiable-length Unicode letter [UTF-8 encoded] )
+
+ when x = ''L''
+    Top Title [0x00] Item Title 1 [0x00] Item Parameter 1 [0x00] ... [0x00] Item Title 6 [0x00] Item Parameter 6 [0x00]
+    (valiable-length Unicode letter [UTF-8 encoded] )
+
+y -> Cursor Position on button
+ ''0'' : Button is not Displayed
+ ''1'' : Cursor is on the button 1
+ ''2'' : Cursor is on the button 2
+
+bbb...bbb -> Text of Button
+    Text of Button 1 [0x00] Text of Button 2 [0x00]
+    (valiable-length Unicode letter [UTF-8 encoded] )';Yes
+"NMD" - iPod Mode Change (with USB Connection Only);;
+"STD";Standerd Mode;Yes
+"EXT";Extend Mode(If available);Yes
+"VDC";Video Contents in Extended Mode;Yes
+"QSTN";gets iPod Mode Status;Yes
+"CCD" - CD Player Operation Command ;;
+"POWER";POWER ON/OFF;No
+"TRACK";TRACK+;No
+"PLAY";PLAY;No
+"STOP";STOP;No
+"PAUSE";PAUSE;No
+"SKIP.F";>>I;No
+"SKIP.R";I<<;No
+"MEMORY";MEMORY;No
+"CLEAR";CLEAR;No
+"REPEAT";REPEAT;No
+"RANDOM";RANDOM;No
+"DISP";DISPLAY;No
+"D.MODE";D.MODE;No
+"FF";FF >>;No
+"REW";REW <<;No
+"OP/CL";OPEN/CLOSE;No
+"1";1;No
+"2";2;No
+"3";3;No
+"4";4;No
+"5";5;No
+"6";6;No
+"7";7;No
+"8";8;No
+"9";9;No
+"0";0;No
+"10";10;No
+"+10";+10;No
+"D.SKIP";DISC +;No
+"DISC.F";DISC +;No
+"DISC.R";DISC -;No
+"DISC1";DISC1;No
+"DISC2";DISC2;No
+"DISC3";DISC3;No
+"DISC4";DISC4;No
+"DISC5";DISC5;No
+"DISC6";DISC6;No
+"STBY";STANDBY;No
+"PON";POWER ON;No
+"CT1" - TAPE1(A) Operation Command ;;
+"PLAY.F";PLAY >;No
+"PLAY.R";PLAY <;No
+"STOP";STOP;No
+"RC/PAU";REC/PAUSE;No
+"FF";FF >>;No
+"REW";REW <<;No
+"CT2" - TAPE2(B) Operation Command ;;
+"PLAY.F";PLAY >;No
+"PLAY.R";PLAY <;No
+"STOP";STOP;No
+"RC/PAU";REC/PAUSE;No
+"FF";FF >>;No
+"REW";REW <<;No
+"OP/CL";OPEN/CLOSE;No
+"SKIP.F";>>I;No
+"SKIP.R";I<<;No
+“REC”;REC;No
+"CEQ" - Graphics Equalizer Operation Command ;;
+"POWER";POWER ON/OFF;No
+"PRESET";PRESET;No
+"CDT" - DAT Recorder Operation Command ;;
+"PLAY";PLAY;No
+"RC/PAU";REC/PAUSE;No
+"STOP";STOP;No
+"SKIP.F";>>I;No
+"SKIP.R";I<<;No
+"FF";FF >>;No
+"REW";REW <<;No
+"CDV" - DVD Player Operation Command (via RIHD only after TX-NR509);;
+"POWER";POWER ON/OFF;Yes
+"PWRON";POWER ON;Yes
+"PWROFF";POWER OFF;Yes
+"PLAY";PLAY;Yes
+"STOP";STOP;Yes
+"SKIP.F";>>I;Yes
+"SKIP.R";I<<;Yes
+"FF";FF >>;Yes
+"REW";REW <<;Yes
+"PAUSE";PAUSE;Yes
+"LASTPLAY";LAST PLAY;Yes
+"SUBTON/OFF";SUBTITLE ON/OFF;Yes
+"SUBTITLE";SUBTITLE;Yes
+"SETUP";SETUP;Yes
+"TOPMENU";TOPMENU;Yes
+"MENU";MENU;Yes
+"UP";UP;Yes
+"DOWN";DOWN;Yes
+"LEFT";LEFT;Yes
+"RIGHT";RIGHT;Yes
+"ENTER";ENTER;Yes
+"RETURN";RETURN;Yes
+"DISC.F";DISC +;Yes
+"DISC.R";DISC -;Yes
+"AUDIO";AUDIO;Yes
+"RANDOM";RANDOM;Yes
+"OP/CL";OPEN/CLOSE;Yes
+"ANGLE";ANGLE;Yes
+"1";1;Yes
+"2";2;Yes
+"3";3;Yes
+"4";4;Yes
+"5";5;Yes
+"6";6;Yes
+"7";7;Yes
+"8";8;Yes
+"9";9;Yes
+"10";10;Yes
+"0";0;Yes
+"SEARCH";SEARCH;Yes
+"DISP";DISPLAY;Yes
+"REPEAT";REPEAT;Yes
+"MEMORY";MEMORY;Yes
+"CLEAR";CLEAR;Yes
+"ABR";A-B REPEAT;Yes
+"STEP.F";STEP ;Yes
+"STEP.R";STEP BACK;Yes
+"SLOW.F";SLOW;Yes
+"SLOW.R";SLOW BACK;Yes
+"ZOOMTG";ZOOM;Yes
+"ZOOMUP";ZOOM UP;Yes
+"ZOOMDN";ZOOM DOWN;Yes
+"PROGRE";PROGRESSIVE;Yes
+"VDOFF";VIDEO ON/OFF;Yes
+"CONMEM";CONDITION MEMORY;Yes
+"FUNMEM";FUNCTION MEMORY;Yes
+"DISC1";DISC1;Yes
+"DISC2";DISC2;Yes
+"DISC3";DISC3;Yes
+"DISC4";DISC4;Yes
+"DISC5";DISC5;Yes
+"DISC6";DISC6;Yes
+"FOLDUP";FOLDER UP;Yes
+"FOLDDN";FOLDER DOWN;Yes
+"P.MODE";PLAY MODE;Yes
+"ASCTG";ASPECT(Toggle);Yes
+"CDPCD";CD CHAIN REPEAT;Yes
+"MSPUP";MULTI SPEED UP;Yes
+"MSPDN";MULTI SPEED DOWN;Yes
+"PCT";PICTURE CONTROL;Yes
+"RSCTG";RESOLUTION(Toggle);Yes
+"INIT";Return to Factory Settings;Yes
+"CMD" - MD Recorder Operation Command ;;
+"POWER";POWER ON/OFF;No
+"PLAY";PLAY;No
+"STOP";STOP;No
+"FF";FF >>;No
+"REW";REW <<;No
+"P.MODE";PLAY MODE;No
+"SKIP.F";>>I;No
+"SKIP.R";I<<;No
+"PAUSE";PAUSE;No
+"REC";REC;No
+"MEMORY";MEMORY;No
+"DISP";DISPLAY;No
+"SCROLL";SCROLL;No
+"M.SCAN";MUSIC SCAN;No
+"CLEAR";CLEAR;No
+"RANDOM";RANDOM;No
+"REPEAT";REPEAT;No
+"ENTER";ENTER;No
+"EJECT";EJECT;No
+"1";1;No
+"2";2;No
+"3";3;No
+"4";4;No
+"5";5;No
+"6";6;No
+"7";7;No
+"8";8;No
+"9";9;No
+"10/0";10/0;No
+"nn/nnn";--/---;No
+"NAME";NAME;No
+"GROUP";GROUP;No
+"STBY";STANDBY;No
+"CCR" - CD-R Recorder Operation Command ;;
+"POWER";POWER ON/OFF;No
+"P.MODE";PLAY MODE;No
+"PLAY";PLAY;No
+"STOP";STOP;No
+"SKIP.F";>>I;No
+"SKIP.R";I<<;No
+"PAUSE";PAUSE;No
+"REC";REC;No
+"CLEAR";CLEAR;No
+"REPEAT";REPEAT;No
+"1";1;No
+"2";2;No
+"3";3;No
+"4";4;No
+"5";5;No
+"6";6;No
+"7";7;No
+"8";8;No
+"9";9;No
+"10/0";10/0;No
+"nn/nnn";--/---;No
+"SCROLL";SCROLL;No
+"OP/CL";OPEN/CLOSE;No
+"DISP";DISPLAY;No
+"RANDOM";RANDOM;No
+"MEMORY";MEMORY;No
+"FF";FF;No
+"REW";REW;No
+"STBY";STANDBY;No
+"CPT" - Universal PORT Operation Command ;;
+"SETUP";SETUP;Yes
+"UP";UP/Tuning Up;Yes
+"DOWN";DOWN/Tuning Down;Yes
+"LEFT";LEFT/Multicast Down;Yes
+"RIGHT";RIGHT/Multicast Up;Yes
+"ENTER";ENTER;Yes
+"RETURN";RETURN;Yes
+"DISP";DISPLAY;Yes
+"PLAY";PLAY/BAND;Yes
+"STOP";STOP;Yes
+"PAUSE";PAUSE;Yes
+"SKIP.F";>>I;Yes
+"SKIP.R";I<<;Yes
+"FF";FF >>;Yes
+"REW";REW <<;Yes
+"REPEAT";REPEAT;Yes
+"SHUFFLE";SHUFFLE;Yes
+"PRSUP";PRESET UP;Yes
+"PRSDN";PRESET DOWN;Yes
+"0";0;Yes
+"1";1;Yes
+"2";2;Yes
+"3";3;Yes
+"4";4;Yes
+"5";5;Yes
+"6";6;Yes
+"7";7;Yes
+"8";8;Yes
+"9";9;Yes
+"10";10/+10/Direct Tuning;Yes
+"MODE";MODE;Yes
+;;
+"IAT" - iPod Artist Name Info (Universal Port Dock Only);;
+"nnnnnnnnnn";iPod Artist Name (variable-length, 64 letters max ASCII letter only);Yes
+"QSTN";gets iPod Artist Name;Yes
+"IAL" - iPod Album Name Info (Universal Port Dock Only);;
+"nnnnnnn";iPod Album Name (variable-length, 64 letters max ASCII letter only);Yes
+"QSTN";gets iPod Album Name;Yes
+"ITI" - iPod Title Name (Universal Port Dock Only);;
+"nnnnnnnnnn";iPod Title Name (variable-length, 64 letters max ASCII letter only);Yes
+"QSTN";gets iPod Title Name;Yes
+"ITM" - iPod Time Info (Universal Port Dock Only);;
+"mm:ss/mm:ss";iPod Time Info (Elapsed time/Track Time Max 99:59);Yes
+"QSTN";gets iPod Time Info;Yes
+"ITR" - iPod Track Info (Universal Port Dock Only);;
+"cccc/tttt";iPod Track Info (Current Track/Toral Track Max 9999);Yes
+"QSTN";gets iPod Time Info;Yes
+"IST" - iPod Play Status (Universal Port Dock Only);;
+"prs";'iPod Play Status (3 letters)
+p -> Play Status "S" STOP, "P" Play, "p" Pause, "F" FF, "R" FR
+r -> Repeat Status "-" no Repeat, "R" All Repeat, "1" Repeat 1,
+s -> Shuffle Status "-" no Shuffle, "S" Shuffle, "A" Album Shuffle';Yes
+"QSTN";gets the iPod Play Status;Yes
+"ILS" - iPod List Info (Universal Port Dock Extend Mode Only);;
+"tlpnnnnnnnnnn";'iPod List Info
+t ->Information Type (A : ASCII letter, C : Cursor Info)
+when t = A,
+  l ->Line Info (0-9 : 1st to 10th Line)
+  nnnnnnnnn:Listed data (variable-length, 64 letters max ASCII letter only)
+  p ->Property (- : no)
+when t = C,
+  l ->Cursor Position (0-9 : 1st to 10th Line, - : No Cursor)
+  p ->Update Type (P : Page Infomation Update ( Page Clear or Disable List Info) , C : Cursor Position Update)';Yes
+"IMD" - iPod Mode Change (Universal Port Dock Only);;
+"STD";Standerd Mode;Yes
+"EXT";Extend Mode(If available);Yes
+"VDC";Video Contents in Extended Mode;Yes
+"QSTN";gets iPod Mode Status;Yes
+;;
+;;
+"UTN" - Tuning Command (Universal Port Dock Only);;
+"nnnnn";sets Directly Tuning Frequency (FM nnn.nn MHz / AM nnnnn kHz);Yes
+"UP";sets Tuning Frequency Wrap-Around Up;Yes
+"DOWN";sets Tuning Frequency Wrap-Around Down;Yes
+"QSTN";gets The Tuning Frequency;Yes
+"UPR" - Preset Command (Universal Port Dock Only);;
+"01"-"28";sets Preset No. 1 - 40 ( In hexadecimal representation);Yes
+"UP";sets Preset No. Wrap-Around Up;Yes
+"DOWN";sets Preset No. Wrap-Around Down;Yes
+"QSTN";gets The Preset No.;Yes
+"UPM" - Preset Memory Command (Universal Port Dock Only);;
+"01"-"28";Memory Preset No. 1 - 40 ( In hexadecimal representation);Yes
+"UHP" - HD Radio Channel Program Command (Universal Port Dock Only);;
+"01"-"08";sets directly HD Radio Channel Program;Yes
+"QSTN";gets HD Radio Channel Program;Yes
+"UHB" - HD Radio Blend Mode Command (Universal Port Dock Only);;
+"00";sets HD Radio Blend Mode "Auto";Yes
+"01";sets HD Radio Blend Mode "Analog";Yes
+"QSTN";gets the HD Radio Blend Mode Status;Yes
+"UHA" - HD Radio Artist Name Info (Universal Port Dock Only);;
+"nnnnnnnnnn";HD Radio Artist Name (variable-length, 64 letters max);Yes
+"QSTN";gets HD Radio Artist Name;Yes
+"UHC" - HD Radio Channel Name Info (Universal Port Dock Only);;
+"nnnnnnn";HD Radio Channel Name (Station Name) (7lettters);Yes
+"QSTN";gets HD Radio Channel Name;Yes
+"UHT" - HD Radio Title Info (Universal Port Dock Only);;
+"nnnnnnnnnn";HD Radio Title (variable-length, 64 letters max);Yes
+"QSTN";gets HD Radio Title;Yes
+"UHD" - HD Radio Detail Info (Universal Port Dock Only);;
+"nnnnnnnnnn";HD Radio Title;Yes
+"QSTN";gets HD Radio Title;Yes
+"UHS" - HD Radio Tuner Status (Universal Port Dock Only);;
+"mmnnoo";'HD Radio Tuner Status (3 bytes)
+mm -> "00" not HD, "01" HD
+nn -> current Program "01"-"08"
+oo -> receivable Program (8 bits are represented in hexadecimal notation. Each bit shows receivable or not.) ';Yes
+"QSTN";gets the HD Radio Tuner Status;Yes
+;;
+;;
+"UPR" - DAB Preset Command (Universal Port Dock Only);;
+"01"-"28";sets Preset No. 1 - 40 ( In hexadecimal representation);Yes
+"UP";sets Preset No. Wrap-Around Up;Yes
+"DOWN";sets Preset No. Wrap-Around Down;Yes
+"QSTN";gets The Preset No.;Yes
+"UPM" - Preset Memory Command (Universal Port Dock Only);;
+"01"-"28";Memory Preset No. 1 - 40 ( In hexadecimal representation);Yes
+"UDS" - DAB Sation Name (Universal Port Dock Only);;
+"nnnnnnnnn";Sation Name (9 letters);Yes
+"QSTN";gets The Tuning Frequency;Yes
+"UDD" - DAB Display Info (Universal Port Dock Only);;
+"PT:nnnnnnnn";DAB Program Type (8 letters);Yes
+"AT:mmmkbps/nnnnnn";DAB Bitrate & Audio Type (m:Bitrate xxxkbps,n:Audio Type Stereo/Mono);Yes
+"MN:nnnnnnnnn";DAB Multiplex Name (9 letters);Yes
+"MF:mmm/nnnn.nnMHz";DAB Multiplex Band ID(mmm) & Freq(nnnn.nnMHz) Info;Yes
+"PT";gets & display DAB Program Info;Yes
+"AT";gets & display DAB Bitrate & Audio Type;Yes
+"MN";gets & display DAB Multicast Name;Yes
+"MF";gets & display DAB Multicast Band & Freq Info;Yes
+"UP";gets & dispaly DAB Infomation Wrap-Around Up;Yes

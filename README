@@ -1,4 +1,14 @@
-Onkyo’s Remote Controller 
+Onkyo’s AVR Remote Controller
+--------------------------
+for my TX-NR609
+
 
 The app operates over a LAN and enables a range of remote control functions, 
 such as volume and tone control and input selection for Onkyo's Receiver 
+
+
+   onkyocli - console client tool for debuging/scripting
+
+   // not implemented now
+   onkyo_client - Qt pugin
+   onkyoapp - QML App

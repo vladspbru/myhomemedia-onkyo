@@ -1,8 +1,9 @@
 #include "onkyoclient.h"
+#include "iscpmessage.h"
 #include <QtNetwork>
 
 OnkyoClient::OnkyoClient(const QString &host, quint16 _port, QObject *parent)
-    : QObject(parent), tcpSocket(), serverName(host), serverPort(_port), dataSize(0)
+    : QObject(parent), tcpSocket(), serverName(host), serverPort(_port), curr_status_()
 {
     connect(&tcpSocket, SIGNAL(readyRead()), this, SLOT(onReadyRead()));
     connect(&tcpSocket, SIGNAL(connected()), this, SLOT(onConnected()));
@@ -34,11 +35,11 @@ bool OnkyoClient::is_connected()
 void OnkyoClient::setConnected(bool f)
 {
     if( f==false )
-            tcpSocket.abort();
+        tcpSocket.abort();
 
     if(f){
         if ( tcpSocket.state() == QAbstractSocket::ConnectedState )
-                return;
+            return;
         if ( tcpSocket.state() != QAbstractSocket::UnconnectedState )
             tcpSocket.abort();
         const int Timeout = 5 * 1000;
@@ -50,8 +51,7 @@ void OnkyoClient::setConnected(bool f)
 
 void OnkyoClient::request(const QString &str)
 {
-    dataSize = 0;
-
+    curr_status_.reset(0);
     // reconect if needed
     if ( ! is_connected() ){
         setConnected(true);
@@ -61,35 +61,21 @@ void OnkyoClient::request(const QString &str)
         }
     }
 
-    // setup tcp packet
-    QByteArray req = str.toUtf8();
-
-    QByteArray block;
-    QDataStream out(&block, QIODevice::WriteOnly);
-    out.setByteOrder(QDataStream::BigEndian);
-    out.writeRawData("ISCP", 4);    //magik
-    out << (qint32)16;              //header size
-    out << (qint32)0;               //empty data size, see down
-    out << (qint8)0x01 << (qint8)0 << (qint8)0 << (qint8)0; // version + 3 reserved
-    out.writeRawData( "!1", 2 );
-    out.writeRawData( req.begin(), req.size() ); // request messqage
-    out << (qint8)0x1A << (qint8)0x0D << (qint8)0x0A; //end
-    out.device()->seek(8); //set data size
-    out << (quint32)(block.size() - 16);
-
-    tcpSocket.write(block);
+    IscpMessage cmd;
+    tcpSocket.write( cmd.make_command(str) );
 }
 
 void OnkyoClient::onReadyRead()
 {
     QDataStream in(&tcpSocket);
 
-    if (dataSize == 0) { // get header
-        char header[16];
-        if (tcpSocket.bytesAvailable() < sizeof(header) )
+
+    if ( curr_status_.isNull() ) { // get header
+        if (tcpSocket.bytesAvailable() < IscpMessage::header_size )
             return;
 
-        in.readRawData( &header[0], sizeof(header) );
+        char header[ IscpMessage::header_size ];
+        in.readRawData( &header[0], IscpMessage::header_size );
         //check format
         if(
                 header[0] != 'I'
@@ -97,23 +83,25 @@ void OnkyoClient::onReadyRead()
                 || header[2] != 'C'
                 || header[3] != 'P'
                 ){
+            curr_status_.reset(0);
             tcpSocket.abort();
-            dataSize = 0;
             emit error( "Bad ISCP format message." );
             return;
         }
-        dataSize = qFromBigEndian<qint32>( reinterpret_cast<uchar*>(&header[8]) );
+        quint32 dataSize = qFromBigEndian<qint32>( reinterpret_cast<uchar*>(&header[8]) );
+
+        curr_status_.reset( new IscpMessage( IscpMessage::header_size + dataSize ) );
+        curr_status_->bytes().insert(0, header, sizeof(header) );
     }
 
-    if (tcpSocket.bytesAvailable() < dataSize)
+    if (tcpSocket.bytesAvailable() < curr_status_->message_size() )
         return;
     //else get data message
-    QByteArray block(dataSize, 0);
-    in.readRawData( block.data(), dataSize ) ;
-    dataSize = 0;
+    in.readRawData( curr_status_->message(), curr_status_->message_size() ) ;
 
-    if(block.size()>5){
-        QString status =  QString::fromUtf8( block.data()+2, block.size()-5 );
+    if( curr_status_->message_size() > 2 ){
+        QString status =  QString::fromUtf8( curr_status_->message()+2, curr_status_->message_size()-2 );
         emit newStatus(status);
     }
+    curr_status_.reset(0);
 }

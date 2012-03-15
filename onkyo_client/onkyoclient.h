@@ -3,6 +3,7 @@
 
 #include <QObject>
 #include <QTcpSocket>
+#include "iscpmessage.h"
 
 class OnkyoClient : public QObject
 {
@@ -31,7 +32,7 @@ private:
     QString serverName;
     quint16 serverPort;
 
-    quint32 dataSize;
+    QScopedPointer<IscpMessage> curr_status_;
 };
 
 #endif // OnkyoClient_H

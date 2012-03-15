@@ -5,3 +5,7 @@ SUBDIRS = \
    onkyocli \
    onkyoapp
 
+OTHER_FILES += \
+    README \
+    LICENSE \
+    COPYING \

@@ -12,12 +12,18 @@ uri = com.vladspbru.qmlcomponents
 SOURCES += \
     onkyo_client_plugin.cpp \
     onkyoremoteitem.cpp \
-    onkyoclient.cpp
+    onkyoclient.cpp \
+    iscpmessage.cpp \
+    devicediscovery.cpp \
+    deviceinfo.cpp
 
 HEADERS += \
     onkyo_client_plugin.h \
     onkyoremoteitem.h \
-    onkyoclient.h
+    onkyoclient.h \
+    iscpmessage.h \
+    devicediscovery.h \
+    deviceinfo.h
 
 OTHER_FILES = qmldir
 

@@ -14,24 +14,28 @@ class DeviceDiscovery : public QObject
 public:
     explicit DeviceDiscovery(QObject *parent=0);
 
-    void discovery(int msec);// start async listen devices
+    // start async listen devices
+    void discovery(int msec);
+    void discoveryOne(int msec);
 
-    QString& getDeviceList();
 
 signals:
+    void error(const QString &message);
     void newDevice(const QString &info);
-    void stoped();
+    void breakTime();
 
 
 private slots:
     void readDeviceDatagrams();
-    void onReady();
+    void onTime();
+    void onError(QAbstractSocket::SocketError socketError);
 
 
 protected:
     void processDeviceDatagrams(DeviceInfo* dev);
 
     QUdpSocket *udpSocket;
+    bool onlyOne;
 
 };
 

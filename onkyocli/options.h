@@ -7,7 +7,6 @@ public:
     const char *host;    /* -H option */
     int port;            /* -p option */
     const char *cmd;     /* -c option */
-    int spy;             /* -s option */
     int tmdelay;         /* -t option */
 
 

@@ -8,9 +8,8 @@
 Options::Options()
     : host(0/*"192.168.1.11"*/), // my default onky
       port(60128),
-      cmd("PWRQSTN"), //default request POWER state
-      spy(0),
-      tmdelay(200)
+      cmd(0),
+      tmdelay(-1)
 {
 }
 
@@ -21,20 +20,18 @@ void Options::display_usage_and_exit( void )
           " -H, --onkyo-host\t onkyo ip address\n"
           " -p, --onkyo-port\t onkyo ip port\n"
           " -c, --command\t ISCP command\n"
-          " -t, --tmdelay\t delay for responce on commands, ms\n"
-          " -s, --spy\t spy commands form onkyo device, don't exit\n"
+          " -t, --tmdelay\t delay for waiting messages, ms\n"
           " -h, --help\t this help."
          );
     exit( EXIT_FAILURE );
 }
 
 
-static const char *optString = "H:p:c:st:h?";
+static const char *optString = "H:p:c:t:h?";
 static const struct option longOpts[] = {
     { "onkyo-host", required_argument, NULL, 'H' },
     { "onkyo-port", required_argument, NULL, 'p' },
     { "command", required_argument, NULL, 'c' },
-    { "spy", no_argument, NULL, 's' },
     { "tmdelay", required_argument, NULL, 't' },
     { "help", no_argument, NULL, 'h' },
     { NULL, no_argument, NULL, 0 }
@@ -54,9 +51,6 @@ int Options::parse_args(int argc, char *argv[])
             break;
         case 'c':
             cmd = optarg;
-            break;
-        case 's':
-            spy = 1; /* true */
             break;
         case 't':
             tmdelay = atoi(optarg);

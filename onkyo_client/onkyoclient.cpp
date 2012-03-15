@@ -2,19 +2,26 @@
 #include "iscpmessage.h"
 #include <QtNetwork>
 
-OnkyoClient::OnkyoClient(const QString &host, quint16 _port, QObject *parent)
-    : QObject(parent), tcpSocket(), serverName(host), serverPort(_port), curr_status_()
+OnkyoClient::OnkyoClient(QObject *parent)
+    : QObject(parent)
 {
-    connect(&tcpSocket, SIGNAL(readyRead()), this, SLOT(onReadyRead()));
-    connect(&tcpSocket, SIGNAL(connected()), this, SLOT(onConnected()));
-    connect(&tcpSocket, SIGNAL(disconnected()), this, SLOT(onDisconnected()));
-    connect(&tcpSocket, SIGNAL(error(QAbstractSocket::SocketError)),this, SLOT(onError(QAbstractSocket::SocketError)));
+}
+
+void OnkyoClient::init(const QString &host, quint16 port)
+{
+    tcpSocket = new QTcpSocket(this);
+    serverName= host;
+    serverPort = port;
+    connect(tcpSocket, SIGNAL(readyRead()), this, SLOT(onReadyRead()));
+    connect(tcpSocket, SIGNAL(connected()), this, SLOT(onConnected()));
+    connect(tcpSocket, SIGNAL(disconnected()), this, SLOT(onDisconnected()));
+    connect(tcpSocket, SIGNAL(error(QAbstractSocket::SocketError)),this, SLOT(onError(QAbstractSocket::SocketError)));
 }
 
 
 void OnkyoClient::onError(QAbstractSocket::SocketError )
 {
-    emit error( tcpSocket.errorString() );
+    emit error( tcpSocket->errorString() );
 }
 
 void OnkyoClient::onConnected()
@@ -29,27 +36,27 @@ void OnkyoClient::onDisconnected()
 
 bool OnkyoClient::is_connected()
 {
-    return tcpSocket.state() == QAbstractSocket::ConnectedState;
+    return tcpSocket->state() == QAbstractSocket::ConnectedState;
 }
 
 void OnkyoClient::setConnected(bool f)
 {
     if( f==false )
-        tcpSocket.abort();
+        tcpSocket->abort();
 
     if(f){
-        if ( tcpSocket.state() == QAbstractSocket::ConnectedState )
+        if ( tcpSocket->state() == QAbstractSocket::ConnectedState )
             return;
-        if ( tcpSocket.state() != QAbstractSocket::UnconnectedState )
-            tcpSocket.abort();
+        if ( tcpSocket->state() != QAbstractSocket::UnconnectedState )
+            tcpSocket->abort();
         const int Timeout = 5 * 1000;
-        tcpSocket.connectToHost(serverName, serverPort);
-        if (!tcpSocket.waitForConnected(Timeout))
-            emit error( tcpSocket.errorString() );
+        tcpSocket->connectToHost(serverName, serverPort);
+        if (!tcpSocket->waitForConnected(Timeout))
+            emit error( tcpSocket->errorString() );
     }
 }
 
-void OnkyoClient::request(const QString &str)
+void OnkyoClient::listen(int ms)
 {
     curr_status_.reset(0);
     // reconect if needed
@@ -61,17 +68,23 @@ void OnkyoClient::request(const QString &str)
         }
     }
 
+    if( ms > 0 )
+        QTimer::singleShot( ms, this, SIGNAL( breakTime() ) );
+}
+
+void OnkyoClient::request(const QString &str, int ms)
+{
+    listen(ms);
     IscpMessage cmd;
-    tcpSocket.write( cmd.make_command(str) );
+    tcpSocket->write( cmd.make_command(str) );
 }
 
 void OnkyoClient::onReadyRead()
 {
-    QDataStream in(&tcpSocket);
-
+    QDataStream in(tcpSocket);
 
     if ( curr_status_.isNull() ) { // get header
-        if (tcpSocket.bytesAvailable() < IscpMessage::header_size )
+        if (tcpSocket->bytesAvailable() < IscpMessage::header_size )
             return;
 
         char header[ IscpMessage::header_size ];
@@ -84,17 +97,17 @@ void OnkyoClient::onReadyRead()
                 || header[3] != 'P'
                 ){
             curr_status_.reset(0);
-            tcpSocket.abort();
+            tcpSocket->abort();
             emit error( "Bad ISCP format message." );
             return;
         }
         quint32 dataSize = qFromBigEndian<qint32>( reinterpret_cast<uchar*>(&header[8]) );
 
-        curr_status_.reset( new IscpMessage( IscpMessage::header_size + dataSize ) );
-        curr_status_->bytes().insert(0, header, sizeof(header) );
+        curr_status_.reset( new IscpMessage( dataSize ) );
+        curr_status_->bytes().prepend( header, sizeof(header) );
     }
 
-    if (tcpSocket.bytesAvailable() < curr_status_->message_size() )
+    if (tcpSocket->bytesAvailable() < curr_status_->message_size() )
         return;
     //else get data message
     in.readRawData( curr_status_->message(), curr_status_->message_size() ) ;

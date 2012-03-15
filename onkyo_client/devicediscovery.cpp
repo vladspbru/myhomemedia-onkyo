@@ -14,6 +14,11 @@ DeviceDiscovery::DeviceDiscovery(QObject *parent)
 {
 }
 
+void DeviceDiscovery::onError(QAbstractSocket::SocketError )
+{
+    emit error( udpSocket->errorString() );
+}
+
 void DeviceDiscovery::readDeviceDatagrams()
 {
     while ( udpSocket->hasPendingDatagrams() )  {
@@ -21,12 +26,18 @@ void DeviceDiscovery::readDeviceDatagrams()
         dev.info.bytes().resize(udpSocket->pendingDatagramSize());
         udpSocket->readDatagram(dev.info.bytes().data(), dev.info.bytes().size(), &dev.addr, &dev.port);
         processDeviceDatagrams(&dev);
+        if( onlyOne ){
+                onTime();
+                break;
+        }
     }
 }
 
-void DeviceDiscovery::discovery(int msec)
+void DeviceDiscovery::discovery(int ms)
 {
     udpSocket = new QUdpSocket(this);
+    connect(udpSocket, SIGNAL(error(QAbstractSocket::SocketError)),this, SLOT(onError(QAbstractSocket::SocketError)));
+
     udpSocket->bind(QHostAddress::LocalHost, disPort);
     udpSocket->joinMulticastGroup( QHostAddress(disGroup) );
 
@@ -35,19 +46,25 @@ void DeviceDiscovery::discovery(int msec)
     IscpMessage qry;
     qry.make_rawcommand("!xECNQSTN");
     udpSocket->writeDatagram( qry.bytes().data(), qry.bytes().size(),
-                                 QHostAddress::Broadcast, disBroadcastPort);
+                              QHostAddress::Broadcast, disBroadcastPort);
+    if( ms > 0 )
+        QTimer::singleShot( ms, this, SLOT( onTime() ) );
 
-    if( msec > 0 ){
-        QTimer::singleShot( msec, this, SLOT( onReady() ) );
-    }
+    onlyOne = false;
 }
 
-void DeviceDiscovery::onReady()
+void DeviceDiscovery::discoveryOne(int msec)
+{
+    discovery(msec);
+    onlyOne = true;
+}
+
+void DeviceDiscovery::onTime()
 {
     udpSocket->disconnect();
     udpSocket->leaveMulticastGroup( QHostAddress(disGroup) );
     udpSocket->deleteLater();
-    emit stoped();
+    emit breakTime();
 }
 
 void DeviceDiscovery::processDeviceDatagrams(DeviceInfo *dev)

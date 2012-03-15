@@ -46,7 +46,8 @@ void OnkyoRemoteItem::removeLink()
 
 void OnkyoRemoteItem::createLink()
 {
-    onkyo_.reset( new OnkyoClient(addr_, port_) );
+    onkyo_.reset( new OnkyoClient() );
+    onkyo_->init(addr_, port_);
     connect(onkyo_.data(), SIGNAL( newStatus(QString) ), this, SLOT(status_(QString)) );
     connect(onkyo_.data(), SIGNAL( error(QString)), this, SLOT(error_(QString)) );
 }

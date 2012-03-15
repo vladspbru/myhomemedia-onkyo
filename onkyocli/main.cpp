@@ -20,29 +20,29 @@ int main(int argc, char *argv[])
     opts.parse_args(argc, argv);
 
     CliPrinter prn;
-    DeviceDiscovery devdis;
+    DeviceDiscovery discover;
+    OnkyoClient cli;
 
     if( !opts.host ){ // search AVR
-        QObject::connect(&devdis, SIGNAL( newDevice(QString) ), &prn, SLOT( cout(QString)) );
-        QObject::connect(&devdis, SIGNAL( stoped() ), &a, SLOT( quit() ) );
+        QObject::connect(&discover, SIGNAL( error(QString) ), &prn, SLOT( cerr(QString)) );
+        QObject::connect(&discover, SIGNAL( newDevice(QString) ), &prn, SLOT( cout(QString)) );
+        QObject::connect(&discover, SIGNAL( breakTime() ), &a, SLOT( quit() ) );
 
-        if( opts.tmdelay )
-            devdis.discovery( opts.tmdelay );
+        if( opts.tmdelay > 0 )
+            discover.discoveryOne( opts.tmdelay );
         else {
-            devdis.discovery( 60*1000 );
-            opts.display_usage_and_exit();
+            discover.discovery( 60*1000 );
         }
     }
-    else {
-        OnkyoClient cli(opts.host, opts.port);
+
+    if( opts.host ){
+        cli.init(opts.host, opts.port);
         QObject::connect(&cli, SIGNAL( error(QString) ), &prn, SLOT( cerr(QString)) );
         QObject::connect(&cli, SIGNAL( newStatus(QString) ), &prn, SLOT( cout(QString)) );
+        QObject::connect(&cli, SIGNAL( breakTime() ), &a, SLOT( quit() ) );
         if(opts.cmd)
-            cli.request(opts.cmd);
-
-        if(opts.spy==0 && opts.tmdelay){
-            QTimer::singleShot(opts.tmdelay, &a, SLOT( quit() ));
-        }
+             cli.request(opts.cmd);
+        else cli.listen(opts.tmdelay);
     }
 
     return a.exec();

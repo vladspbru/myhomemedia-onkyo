@@ -8,24 +8,26 @@ CONFIG += qt plugin
 TARGET = $$qtLibraryTarget($$TARGET)
 uri = com.vladspbru.qmlcomponents
 
+INCLUDEPATH += ../lib
+
 # Input
 SOURCES += \
+    ../lib/deviceinfo.cpp \
+    ../lib/devicediscovery.cpp \
+    ../lib/devicediscoverysimple.cpp \
+    ../lib/iscpmessage.cpp \
+    ../lib/onkyoclient.cpp \
     onkyo_client_plugin.cpp \
-    onkyoremoteitem.cpp \
-    onkyoclient.cpp \
-    iscpmessage.cpp \
-    devicediscovery.cpp \
-    deviceinfo.cpp \
-    devicediscoverysimple.cpp
+    onkyoremoteitem.cpp 
 
 HEADERS += \
+    ../lib/deviceinfo.h \
+    ../lib/devicediscovery.h \
+    ../lib/devicediscoverysimple.h \
+    ../lib/iscpmessage.h \
+    ../lib/onkyoclient.h \
     onkyo_client_plugin.h \
-    onkyoremoteitem.h \
-    onkyoclient.h \
-    iscpmessage.h \
-    devicediscovery.h \
-    deviceinfo.h \
-    devicediscoverysimple.h
+    onkyoremoteitem.h 
 
 OTHER_FILES = qmldir
 

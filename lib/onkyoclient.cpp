@@ -6,14 +6,13 @@
 
 OnkyoClient::OnkyoClient(QObject *parent)
     : QObject(parent)
+    , serverName()
+    , serverPort(0)
 {
 }
 
 bool OnkyoClient::init()
 {
-    serverName = "";
-    serverPort = 0;
-
     DeviceDiscoverySimple discover;
     DeviceInfo      dev;
     if( !discover.discoveryOne( 1000, dev ) ) {
@@ -26,9 +25,10 @@ bool OnkyoClient::init()
 
 void OnkyoClient::init(const QString &host, quint16 port)
 {
-    tcpSocket = new QTcpSocket(this);
     serverName= host;
     serverPort = port;
+
+    tcpSocket = new QTcpSocket(this);
     connect(tcpSocket, SIGNAL(readyRead()), this, SLOT(onReadyRead()));
     connect(tcpSocket, SIGNAL(connected()), this, SLOT(onConnected()));
     connect(tcpSocket, SIGNAL(disconnected()), this, SLOT(onDisconnected()));

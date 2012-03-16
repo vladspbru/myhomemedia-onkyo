@@ -14,23 +14,21 @@ CONFIG   -= app_bundle
 
 TEMPLATE = app
 
-INCLUDEPATH += ../onkyo_client
+INCLUDEPATH += ../lib
 
 SOURCES += main.cpp \
-    ../onkyo_client/iscpmessage.cpp \
-    ../onkyo_client/devicediscoverysimple.cpp \
-    ../onkyo_client/devicediscovery.cpp \
-    ../onkyo_client/deviceinfo.cpp \
-    ../onkyo_client/onkyoclient.cpp \
+    ../lib/deviceinfo.cpp \
+    ../lib/devicediscoverysimple.cpp \
+    ../lib/iscpmessage.cpp \
+    ../lib/onkyoclient.cpp \
     cliprinter.cpp \
     options.cpp
 
 HEADERS += \
-    ../onkyo_client/iscpmessage.h \
-    ../onkyo_client/devicediscoverysimple.h \
-    ../onkyo_client/devicediscovery.h \
-    ../onkyo_client/deviceinfo.h \
-    ../onkyo_client/onkyoclient.h \
+    ../lib/deviceinfo.h \
+    ../lib/devicediscoverysimple.h \
+    ../lib/iscpmessage.h \
+    ../lib/onkyoclient.h \
     cliprinter.h \
     options.h
 

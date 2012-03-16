@@ -9,12 +9,13 @@
 const char *dddGroup = "239.255.250.250";
 const int   dddPort = 9131;
 
-
 const int defOnkyoPort = 60128;
 
 DeviceDiscovery::DeviceDiscovery(QObject *parent)
     :QObject(parent)
 {
+    broadcastSocket = new QUdpSocket(this);
+    connect(broadcastSocket, SIGNAL(error(QAbstractSocket::SocketError)),this, SLOT(onError(QAbstractSocket::SocketError)));
 }
 
 void DeviceDiscovery::onError(QAbstractSocket::SocketError )
@@ -28,27 +29,12 @@ void DeviceDiscovery::readDeviceDatagrams()
         DeviceInfo dev;
         dev.info.bytes().resize(broadcastSocket->pendingDatagramSize());
         broadcastSocket->readDatagram(dev.info.bytes().data(), dev.info.bytes().size(), &dev.addr, &dev.port);
-        processDeviceDatagrams(&dev);
-        if( onlyOne ){
-            onTime();
-            break;
-        }
+        emit newDevice( dev );
     }
 }
 
-//void DeviceDiscovery::discoveryMcast(int ms)
-//{
-//        broadcastSocket->bind(QHostAddress::Any, disPort);
-//        broadcastSocket->joinMulticastGroup( QHostAddress(disGroup) );
-//        broadcastSocket->writeDatagram( qry.bytes(), QHostAddress(disGroup), defOnkyoPort);
-//        broadcastSocket->writeDatagram( qry.bytes(), QHostAddress(disGroup), disPort);
-//}
-
 void DeviceDiscovery::discovery(int ms)
 {
-    broadcastSocket = new QUdpSocket(this);
-    connect(broadcastSocket, SIGNAL(error(QAbstractSocket::SocketError)),this, SLOT(onError(QAbstractSocket::SocketError)));
-
     broadcastSocket->bind();
     connect(broadcastSocket, SIGNAL(readyRead()), this, SLOT(readDeviceDatagrams()));
 
@@ -67,26 +53,18 @@ void DeviceDiscovery::discovery(int ms)
 
     if( ms > 0 )
         QTimer::singleShot( ms, this, SLOT( onTime() ) );
-    onlyOne = false;
 }
 
-void DeviceDiscovery::discoveryOne(int msec)
+void DeviceDiscovery::stopDiscovery()
 {
-    discovery(msec);
-    onlyOne = true;
+    broadcastSocket->disconnect();
+    broadcastSocket->deleteLater();
 }
 
 void DeviceDiscovery::onTime()
 {
-    broadcastSocket->disconnect();
-    //    broadcastSocket->leaveMulticastGroup( QHostAddress(disGroup) );
-    broadcastSocket->deleteLater();
+    stopDiscovery();
     emit breakTime();
 }
 
-void DeviceDiscovery::processDeviceDatagrams(DeviceInfo *dev)
-{
-    QString info( dev->info.message( ) );
-    emit newDevice( info + ";" + dev->addr.toString() );
-}
 

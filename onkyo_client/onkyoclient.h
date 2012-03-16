@@ -11,8 +11,9 @@ class OnkyoClient : public QObject
 
 public:
     explicit OnkyoClient(QObject *parent = 0);
+    bool init();// init from discovery service
     void init(const QString &host, quint16 port=60128);
-    
+
     void request(const QString &req, int ms=300);
     void listen(int ms=-1);
 

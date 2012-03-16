@@ -1,14 +1,19 @@
 #ifndef DEVICEINFO_H
 #define DEVICEINFO_H
 
+#include <QObject>
+#include <QString>
 #include <QHostAddress>
 #include <QByteArray>
 #include "iscpmessage.h"
 
-class DeviceInfo
+class DeviceInfo: public QObject
 {
+    Q_OBJECT
+
 public:
-    DeviceInfo(): addr(), port(), info() {}
+    explicit DeviceInfo(QObject* parent=0);
+    QString  toString() {  return addr.toString() + ";" + info.message(); }
 
     QHostAddress addr;
     quint16      port;

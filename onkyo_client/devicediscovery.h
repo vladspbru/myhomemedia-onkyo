@@ -16,12 +16,13 @@ public:
 
     // start async listen devices
     void discovery(int msec);
-    void discoveryOne(int msec);
 
+public slots:
+    void stopDiscovery();
 
 signals:
     void error(const QString &message);
-    void newDevice(const QString &info);
+    void newDevice(const DeviceInfo &info);
     void breakTime();
 
 
@@ -32,11 +33,7 @@ private slots:
 
 
 protected:
-    void processDeviceDatagrams(DeviceInfo* dev);
-
     QUdpSocket *broadcastSocket;
-    bool onlyOne;
-
 };
 
 #endif // DEVICEDISCOVERY_H

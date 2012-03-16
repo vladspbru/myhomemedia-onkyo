@@ -1,10 +1,27 @@
 #include "onkyoclient.h"
 #include "iscpmessage.h"
+#include "devicediscoverysimple.h"
+#include "deviceinfo.h"
 #include <QtNetwork>
 
 OnkyoClient::OnkyoClient(QObject *parent)
     : QObject(parent)
 {
+}
+
+bool OnkyoClient::init()
+{
+    serverName = "";
+    serverPort = 0;
+
+    DeviceDiscoverySimple discover;
+    DeviceInfo      dev;
+    if( !discover.discoveryOne( 1000, dev ) ) {
+        emit error( "No Onkyo on net!." );
+        return false;
+    }
+    init(dev.addr.toString(), dev.port);
+    return true;
 }
 
 void OnkyoClient::init(const QString &host, quint16 port)
@@ -49,7 +66,7 @@ void OnkyoClient::setConnected(bool f)
             return;
         if ( tcpSocket->state() != QAbstractSocket::UnconnectedState )
             tcpSocket->abort();
-        const int Timeout = 5 * 1000;
+        const int Timeout = 3 * 1000;
         tcpSocket->connectToHost(serverName, serverPort);
         if (!tcpSocket->waitForConnected(Timeout))
             emit error( tcpSocket->errorString() );

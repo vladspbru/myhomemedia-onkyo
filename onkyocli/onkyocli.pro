@@ -18,6 +18,7 @@ INCLUDEPATH += ../onkyo_client
 
 SOURCES += main.cpp \
     ../onkyo_client/iscpmessage.cpp \
+    ../onkyo_client/devicediscoverysimple.cpp \
     ../onkyo_client/devicediscovery.cpp \
     ../onkyo_client/deviceinfo.cpp \
     ../onkyo_client/onkyoclient.cpp \
@@ -26,6 +27,7 @@ SOURCES += main.cpp \
 
 HEADERS += \
     ../onkyo_client/iscpmessage.h \
+    ../onkyo_client/devicediscoverysimple.h \
     ../onkyo_client/devicediscovery.h \
     ../onkyo_client/deviceinfo.h \
     ../onkyo_client/onkyoclient.h \

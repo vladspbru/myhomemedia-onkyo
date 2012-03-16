@@ -15,7 +15,8 @@ SOURCES += \
     onkyoclient.cpp \
     iscpmessage.cpp \
     devicediscovery.cpp \
-    deviceinfo.cpp
+    deviceinfo.cpp \
+    devicediscoverysimple.cpp
 
 HEADERS += \
     onkyo_client_plugin.h \
@@ -23,7 +24,8 @@ HEADERS += \
     onkyoclient.h \
     iscpmessage.h \
     devicediscovery.h \
-    deviceinfo.h
+    deviceinfo.h \
+    devicediscoverysimple.h
 
 OTHER_FILES = qmldir
 

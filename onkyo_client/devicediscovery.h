@@ -34,7 +34,7 @@ private slots:
 protected:
     void processDeviceDatagrams(DeviceInfo* dev);
 
-    QUdpSocket *udpSocket;
+    QUdpSocket *broadcastSocket;
     bool onlyOne;
 
 };

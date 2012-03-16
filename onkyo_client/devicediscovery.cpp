@@ -2,13 +2,15 @@
 #include "deviceinfo.h"
 #include "iscpmessage.h"
 #include <QTimer>
+#include <QNetworkInterface>
 
 
-const char *disGroup = "239.255.250.250";
-const int disPort = 9131;
+//Dynamic Device Discovery params
+const char *dddGroup = "239.255.250.250";
+const int   dddPort = 9131;
+
 
 const int defOnkyoPort = 60128;
-
 
 DeviceDiscovery::DeviceDiscovery(QObject *parent)
     :QObject(parent)
@@ -17,45 +19,54 @@ DeviceDiscovery::DeviceDiscovery(QObject *parent)
 
 void DeviceDiscovery::onError(QAbstractSocket::SocketError )
 {
-    emit error( udpSocket->errorString() );
+    emit error( broadcastSocket->errorString() );
 }
 
 void DeviceDiscovery::readDeviceDatagrams()
 {
-    while ( udpSocket->hasPendingDatagrams() )  {
+    while ( broadcastSocket->hasPendingDatagrams() )  {
         DeviceInfo dev;
-        dev.info.bytes().resize(udpSocket->pendingDatagramSize());
-        udpSocket->readDatagram(dev.info.bytes().data(), dev.info.bytes().size(), &dev.addr, &dev.port);
+        dev.info.bytes().resize(broadcastSocket->pendingDatagramSize());
+        broadcastSocket->readDatagram(dev.info.bytes().data(), dev.info.bytes().size(), &dev.addr, &dev.port);
         processDeviceDatagrams(&dev);
         if( onlyOne ){
-                onTime();
-                break;
+            onTime();
+            break;
         }
     }
 }
 
+//void DeviceDiscovery::discoveryMcast(int ms)
+//{
+//        broadcastSocket->bind(QHostAddress::Any, disPort);
+//        broadcastSocket->joinMulticastGroup( QHostAddress(disGroup) );
+//        broadcastSocket->writeDatagram( qry.bytes(), QHostAddress(disGroup), defOnkyoPort);
+//        broadcastSocket->writeDatagram( qry.bytes(), QHostAddress(disGroup), disPort);
+//}
+
 void DeviceDiscovery::discovery(int ms)
 {
-    udpSocket = new QUdpSocket(this);
-    connect(udpSocket, SIGNAL(error(QAbstractSocket::SocketError)),this, SLOT(onError(QAbstractSocket::SocketError)));
+    broadcastSocket = new QUdpSocket(this);
+    connect(broadcastSocket, SIGNAL(error(QAbstractSocket::SocketError)),this, SLOT(onError(QAbstractSocket::SocketError)));
 
-    udpSocket->bind();
-//    udpSocket->bind(QHostAddress::Any, disPort);
-    udpSocket->joinMulticastGroup( QHostAddress(disGroup) );
-
-    connect(udpSocket, SIGNAL(readyRead()), this, SLOT(readDeviceDatagrams()));
+    broadcastSocket->bind();
+    connect(broadcastSocket, SIGNAL(readyRead()), this, SLOT(readDeviceDatagrams()));
 
     IscpMessage qry;
     qry.make_rawcommand("!xECNQSTN");
-    udpSocket->writeDatagram( qry.bytes(), QHostAddress("192.168.1.11"), defOnkyoPort);
-    udpSocket->writeDatagram( qry.bytes(), QHostAddress("192.168.1.255"), defOnkyoPort);
-    udpSocket->writeDatagram( qry.bytes(), QHostAddress::Broadcast, defOnkyoPort);
 
-//    udpSocket->writeDatagram( qry.bytes(), QHostAddress(disGroup), defOnkyoPort);
-//    udpSocket->writeDatagram( qry.bytes(), QHostAddress(disGroup), disPort);
+    QList<QNetworkInterface>	infs = 	QNetworkInterface::allInterfaces();
+    foreach(QNetworkInterface interface, infs){
+        foreach (QNetworkAddressEntry entry, interface.addressEntries()) {
+            if( !entry.broadcast().isNull() ){
+                qDebug() << "IP: " << entry.ip().toString() << "\nNetmask " << entry.netmask().toString() << "\nBroadcast " << entry.broadcast().toString();
+                broadcastSocket->writeDatagram( qry.bytes(), entry.broadcast(), defOnkyoPort);
+            }
+        }
+    }
+
     if( ms > 0 )
         QTimer::singleShot( ms, this, SLOT( onTime() ) );
-
     onlyOne = false;
 }
 
@@ -67,9 +78,9 @@ void DeviceDiscovery::discoveryOne(int msec)
 
 void DeviceDiscovery::onTime()
 {
-    udpSocket->disconnect();
-    udpSocket->leaveMulticastGroup( QHostAddress(disGroup) );
-    udpSocket->deleteLater();
+    broadcastSocket->disconnect();
+    //    broadcastSocket->leaveMulticastGroup( QHostAddress(disGroup) );
+    broadcastSocket->deleteLater();
     emit breakTime();
 }
 

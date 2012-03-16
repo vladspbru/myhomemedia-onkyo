@@ -16,6 +16,5 @@ void CliPrinter::cout(const QString& str)
 
 void CliPrinter::cerr(const QString& str)
 {
-    //qDebug() << str.toLocal8Bit();
-    std::cerr<<str.toLocal8Bit().constData()<<std::endl;
+    std::cerr<<qPrintable( str.simplified() )<<std::endl;
 }

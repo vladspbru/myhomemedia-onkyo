@@ -28,7 +28,8 @@ bool DeviceDiscoverySimple::discoveryOne(int msec, DeviceInfo& dev)
         while ( broadcastSocket->hasPendingDatagrams() )  {
             dev.info.bytes().resize(broadcastSocket->pendingDatagramSize());
             broadcastSocket->readDatagram(dev.info.bytes().data(), dev.info.bytes().size(), &dev.addr, &dev.port);
-            return true;
+            if( dev.info.isEISCP() )
+                    return true;
         }
     return false;
 }

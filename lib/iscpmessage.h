@@ -11,6 +11,9 @@ public:
     IscpMessage(int sz = 0);
     IscpMessage(const QByteArray&  ba);
 
+    bool isEISCP();
+    QString toString() const;
+
     QByteArray&  bytes(void) {
         return block;
     }

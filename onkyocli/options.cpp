@@ -6,10 +6,10 @@
 #include <unistd.h>
 
 Options::Options()
-    : host(0/*"192.168.1.11"*/), // my default onky
-      port(60128),
-      cmd(0),
-      tmdelay(-1)
+    : cmd(0),
+      tmdelay(300),
+      host(0),
+      port(60128)
 {
 }
 
@@ -17,11 +17,12 @@ void Options::display_usage_and_exit( void )
 {
     puts( "Onkyo receiver control client (eISCP) over IP" );
     puts( "Options:\n"
-          " -H, --onkyo-host\t onkyo ip address\n"
-          " -p, --onkyo-port\t onkyo ip port\n"
+          " -h, --help\t this help.\n"
           " -c, --command\t ISCP command\n"
           " -t, --tmdelay\t delay for waiting messages, ms\n"
-          " -h, --help\t this help."
+          "\n two following commands are not required\n"
+          " -H, --onkyo-host\t onkyo ip address\n"
+          " -p, --onkyo-port\t onkyo ip port\n"
          );
     exit( EXIT_FAILURE );
 }

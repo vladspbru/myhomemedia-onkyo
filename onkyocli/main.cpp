@@ -20,19 +20,28 @@ int main(int argc, char *argv[])
 
     CliPrinter prn;
     OnkyoClient cli;
-
-    if( opts.host )
-        cli.init(opts.host, opts.port);
-    else
-        if(! cli.init() )
-            opts.display_usage_and_exit();
-
     QObject::connect(&cli, SIGNAL( error(QString) ), &prn, SLOT( cerr(QString)) );
     QObject::connect(&cli, SIGNAL( newStatus(QString) ), &prn, SLOT( cout(QString)) );
-    QObject::connect(&cli, SIGNAL( breakTime() ), &a, SLOT( quit() ) );
+
+    if( !opts.host ){
+        if( ! cli.init() )
+            opts.display_usage_and_exit();
+        else
+            prn.cout( cli.getDeviceInfo().toString() );
+    }
+    else {
+        DeviceInfo d;
+        d.addr = QHostAddress(opts.host);
+        d.port = opts.port;
+        cli.init(d);
+    }
+
+    if( opts.tmdelay > 0)
+        QTimer::singleShot( opts.tmdelay, &a, SLOT( quit() ) );
+
+    cli.setConnected(true);
     if(opts.cmd)
         cli.request(opts.cmd);
-    else cli.listen(opts.tmdelay);
 
     return a.exec();
 }

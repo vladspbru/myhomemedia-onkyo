@@ -4,6 +4,7 @@
 #include <QObject>
 #include <QTcpSocket>
 #include "iscpmessage.h"
+#include "deviceinfo.h"
 
 class OnkyoClient : public QObject
 {
@@ -11,19 +12,20 @@ class OnkyoClient : public QObject
 
 public:
     explicit OnkyoClient(QObject *parent = 0);
+
     bool init();// init from discovery service
-    void init(const QString &host, quint16 port=60128);
+    void init(const DeviceInfo& d) { dev.addr = d.addr; dev.port = d.port; }
 
-    void request(const QString &req, int ms=300);
-    void listen(int ms=-1);
+    const DeviceInfo& getDeviceInfo() const { return dev; }
 
-    bool is_connected();
+    bool is_connected() const;
     void setConnected(bool f);
+
+    void request(const QString &req);
 
 signals:
     void newStatus(const QString &status);
     void error(const QString &message);
-    void breakTime();
 
 private slots:
     void onConnected();
@@ -32,8 +34,7 @@ private slots:
     void onError(QAbstractSocket::SocketError socketError);
 
 private:
-    QString serverName;
-    quint16 serverPort;
+    DeviceInfo  dev;
     QTcpSocket *tcpSocket;
 
     QScopedPointer<IscpMessage> curr_status_;

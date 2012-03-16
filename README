@@ -1,14 +1,27 @@
 Onkyo’s AVR Remote Controller
 --------------------------
-for my TX-NR609
-
+tested on my TX-NR609
 
 The app operates over a LAN and enables a range of remote control functions, 
 such as volume and tone control and input selection for Onkyo's Receiver 
 
-
    onkyocli - console client tool for debuging/scripting
+   --------
+   Options:
+    -h, --help              this help.
+    -c, --command           ISCP command
+    -t, --tmdelay           delay for waiting messages, ms
+
+    two following commands are not required
+    -H, --onkyo-host        onkyo ip address
+    -p, --onkyo-port        onkyo ip port
+
 
    // not implemented now
-   onkyo_client - Qt pugin
-   onkyoapp - QML App
+    onkyo_client - Qt pugin
+    ------------
+
+
+    onkyoapp - QML App
+    ------------
+

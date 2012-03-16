@@ -4,10 +4,11 @@
 class Options
 {
 public:
-    const char *host;    /* -H option */
-    int port;            /* -p option */
     const char *cmd;     /* -c option */
     int tmdelay;         /* -t option */
+
+    const char *host;    /* -H option */
+    int port;            /* -p option */
 
 
     Options();

@@ -13,7 +13,7 @@ class DeviceInfo: public QObject
 
 public:
     explicit DeviceInfo(QObject* parent=0);
-    QString  toString() {  return addr.toString() + ";" + info.message(); }
+    QString  toString() const  {  return addr.toString() + ";" + info.toString(); }
 
     QHostAddress addr;
     quint16      port;

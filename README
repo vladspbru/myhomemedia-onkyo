@@ -16,6 +16,11 @@ such as volume and tone control and input selection for Onkyo's Receiver
     -H, --onkyo-host        onkyo ip address
     -p, --onkyo-port        onkyo ip port
 
+    Examples:
+          onkyocli -c PWDQSTN               query POWER state
+          onkyocli -t -1 -H 192.168.1.11    spy device command
+
+
 
    // not implemented now
     onkyo_client - Qt pugin

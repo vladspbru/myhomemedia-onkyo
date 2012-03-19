@@ -9,7 +9,9 @@ Options::Options()
     : cmd(0),
       tmdelay(300),
       host(0),
-      port(60128)
+      port(60128),
+      inputCmds(0),
+      numInputCmds(0)
 {
 }
 
@@ -23,6 +25,9 @@ void Options::display_usage_and_exit( void )
           "\n two following commands are not required\n"
           " -H, --onkyo-host\t onkyo ip address\n"
           " -p, --onkyo-port\t onkyo ip port\n"
+          "\n Examples:\n"
+          "\t onkyocli -c PWDQSTN\n"
+          "\t onkyocli -t -1 -H 192.168.1.11\n"
          );
     exit( EXIT_FAILURE );
 }
@@ -65,5 +70,9 @@ int Options::parse_args(int argc, char *argv[])
         }
         opt = getopt_long( argc, argv, optString, longOpts, &longIndex );
     }
+
+    this->inputCmds = argv + optind;
+    this->numInputCmds = argc - optind;
+
     return 0;
 }

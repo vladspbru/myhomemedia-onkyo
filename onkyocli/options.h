@@ -1,3 +1,4 @@
+
 #ifndef OPTIONS_H
 #define OPTIONS_H
 
@@ -10,9 +11,11 @@ public:
     const char *host;    /* -H option */
     int port;            /* -p option */
 
+    char **inputCmds;
+    int    numInputCmds;
 
     Options();
-    int parse_args (int argc, char *argv[]);
+    int parse_args ( int argc, char *argv[] );
     void display_usage_and_exit( void );
 
 };

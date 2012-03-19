@@ -20,6 +20,7 @@ bool DeviceDiscoverySimple::discoveryOne(int msec, DeviceInfo& dev)
         foreach (QNetworkAddressEntry entry, interface.addressEntries()) {
             if( !entry.broadcast().isNull() ){
                 broadcastSocket->writeDatagram( qry.bytes(), entry.broadcast(), 60128);
+                qDebug()<< "broadcast to " << entry.broadcast().toString();
             }
         }
     }
@@ -29,7 +30,7 @@ bool DeviceDiscoverySimple::discoveryOne(int msec, DeviceInfo& dev)
             dev.info.bytes().resize(broadcastSocket->pendingDatagramSize());
             broadcastSocket->readDatagram(dev.info.bytes().data(), dev.info.bytes().size(), &dev.addr, &dev.port);
             if( dev.info.isEISCP() )
-                    return true;
+                return true;
         }
     return false;
 }

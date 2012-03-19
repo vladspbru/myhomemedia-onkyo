@@ -42,6 +42,12 @@ int main(int argc, char *argv[])
     cli.setConnected(true);
     if(opts.cmd)
         cli.request(opts.cmd);
+    if( opts.numInputCmds ){
+        for (int i=0; i< opts.numInputCmds; ++i ){
+            cli.request( opts.inputCmds[i] );
+            qDebug()<< opts.inputCmds[i]<< " sended.";
+        }
+    }
 
     return a.exec();
 }

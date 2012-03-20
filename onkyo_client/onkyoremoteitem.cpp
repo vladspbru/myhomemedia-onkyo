@@ -47,11 +47,18 @@ void OnkyoRemoteItem::removeLink()
 void OnkyoRemoteItem::createLink()
 {
     onkyo_.reset( new OnkyoClient() );
-    if( !onkyo_->init() ){
-
-    }
     connect(onkyo_.data(), SIGNAL( newStatus(QString) ), this, SLOT(status_(QString)) );
     connect(onkyo_.data(), SIGNAL( error(QString)), this, SLOT(error_(QString)) );
+
+    if(addr_.isEmpty())
+        onkyo_->init();
+    else {
+        DeviceInfo d;
+        d.addr = QHostAddress(addr_);
+        d.port = port_;
+        onkyo_->init(d);
+    }
+    onkyo_->setConnected(true);
 }
 
 void OnkyoRemoteItem::status_(const QString &str)

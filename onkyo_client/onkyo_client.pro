@@ -1,10 +1,10 @@
 TEMPLATE = lib
 TARGET = onkyo_client
-QT += declarative network
 CONFIG += qt plugin
+QT += declarative network
 
 
-#DESTDIR = ../gtroot
+DESTDIR = plugins
 TARGET = $$qtLibraryTarget($$TARGET)
 uri = com.vladspbru.qmlcomponents
 
@@ -18,7 +18,8 @@ SOURCES += \
     ../lib/iscpmessage.cpp \
     ../lib/onkyoclient.cpp \
     onkyo_client_plugin.cpp \
-    onkyoremoteitem.cpp 
+    onkyoremoteitem.cpp \ 
+    onkyoparameteritem.cpp
 
 HEADERS += \
     ../lib/deviceinfo.h \
@@ -27,9 +28,11 @@ HEADERS += \
     ../lib/iscpmessage.h \
     ../lib/onkyoclient.h \
     onkyo_client_plugin.h \
-    onkyoremoteitem.h 
+    onkyoremoteitem.h \ 
+    onkyoparameteritem.h
 
 OTHER_FILES = qmldir
+OTHER_FILES += onkyo_client.qml
 
 !equals(_PRO_FILE_PWD_, $$OUT_PWD) {
     copy_qmldir.target = $$OUT_PWD/qmldir

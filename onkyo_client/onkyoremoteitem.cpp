@@ -1,6 +1,7 @@
 #include "onkyoremoteitem.h"
 #include <QtDeclarative/qdeclarative.h>
 
+#include "onkyoparameteritem.h"
 #include "onkyoclient.h"
 
 OnkyoRemoteItem::OnkyoRemoteItem(QDeclarativeItem *parent):
@@ -30,6 +31,7 @@ int OnkyoRemoteItem::port()
 {
     return port_;
 }
+
 void OnkyoRemoteItem::setPort(int p)
 {
     port_ = p;
@@ -65,7 +67,13 @@ void OnkyoRemoteItem::status_(const QString &str)
 {
     if( str.isEmpty() )
         emit connectChanged();
-    else emit status(str);
+    else {
+        emit status(str);
+        foreach(OnkyoParameterItem* p, params_){
+            if( str.startsWith( p->nik() ) )
+                p->setValue( QString(str).remove(0, p->nik().size() ) );
+        }
+    }
 }
 
 void OnkyoRemoteItem::error_(const QString &str)
@@ -81,7 +89,46 @@ bool OnkyoRemoteItem::getConnected()
 void OnkyoRemoteItem::cmd(const QString &str)
 {
     if( onkyo_.isNull() )
-           createLink();
+        createLink();
     onkyo_->request(str);
+}
+
+OnkyoParameterItem* OnkyoRemoteItem::takeParameter(const QString& name)
+{
+    OnkyoParameterItem* param=0;
+    foreach(OnkyoParameterItem* p, params_){
+        if( p->nik() == name )
+            param = p;
+            break;
+    }
+
+    if( param == 0 ){
+        OnkyoParameterItem* param = new OnkyoParameterItem(this);
+        param->setNik(name);
+        params_.push_back(param);
+        emit parametersChanged();
+    }
+    return param;
+}
+
+QDeclarativeListProperty<OnkyoParameterItem> OnkyoRemoteItem::parameters()
+{
+    return QDeclarativeListProperty<OnkyoParameterItem>(this, 0, &OnkyoRemoteItem::append_param);
+}
+
+void OnkyoRemoteItem::append_param(QDeclarativeListProperty<OnkyoParameterItem> *list, OnkyoParameterItem *par)
+{
+    OnkyoRemoteItem *onkyo = qobject_cast<OnkyoRemoteItem *>(list->object);
+    if (onkyo) {
+        onkyo->params_.append(par);
+        emit onkyo->parametersChanged();
+    }
+}
+
+void OnkyoRemoteItem::query_parameters_state()
+{
+    foreach(OnkyoParameterItem* p, params_){
+            p->query_state();
+    }
 }
 

@@ -1,9 +1,9 @@
 #ifndef ONKYOPARAMETERITEM_H
 #define ONKYOPARAMETERITEM_H
 
-#include <QtDeclarative/QDeclarativeItem>
+#include <QObject>
 
-class OnkyoParameterItem : public QDeclarativeItem
+class OnkyoParameterItem : public QObject
 {
     Q_OBJECT
     Q_DISABLE_COPY(OnkyoParameterItem)
@@ -12,7 +12,13 @@ class OnkyoParameterItem : public QDeclarativeItem
     Q_PROPERTY(QString value READ value WRITE setValue NOTIFY valueChanged)
 
 public:
-    explicit OnkyoParameterItem(QDeclarativeItem *parent = 0);
+    explicit OnkyoParameterItem(QObject *parent = 0);
+
+    QString nik() { return nik_; }
+    void setNik(const QString& c) { nik_ = c; }
+
+    QString value() { return value_; }
+    void setValue(const QString& v);
 
     Q_INVOKABLE void query(const QString& sub);
 
@@ -20,19 +26,12 @@ signals:
     void valueChanged();
 
 public slots:
-    void query_status() { query("QSTN"); }
+    void query_state() { query("QSTN"); }
+
 
 protected:
-    QString nik() { return nik_; }
-    void setNik(const QString& c) { nik_ = c; }
-    QString value() { return value_; }
-    void setValue(const QString& v) { value_ = v; }
-
-
     QString nik_;
     QString value_;
 };
-
-QML_DECLARE_TYPE(OnkyoParameterItem)
 
 #endif // ONKYOPARAMETERITEM_H

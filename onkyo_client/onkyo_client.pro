@@ -31,8 +31,8 @@ HEADERS += \
     onkyoremoteitem.h \ 
     onkyoparameteritem.h
 
-OTHER_FILES = qmldir
-OTHER_FILES += onkyo_client.qml
+OTHER_FILES = qmldir \
+    onkyo_client.qml
 
 !equals(_PRO_FILE_PWD_, $$OUT_PWD) {
     copy_qmldir.target = $$OUT_PWD/qmldir

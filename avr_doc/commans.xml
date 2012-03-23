@@ -1,0 +1,468 @@
+<commands>
+<command>
+</command>
+<command>
+<code>PWR</code>
+<means>System Power  </means>
+</command>
+<command>
+<code>AMT</code>
+<means>Audio Muting</means>
+</command>
+<command>
+<code>SPA/SPB</code>
+<means>Speaker A/B</means>
+</command>
+<command>
+<code>SPL</code>
+<means>Speaker Layout</means>
+</command>
+<command>
+<code>MVL</code>
+<means>Master Volume </means>
+</command>
+<command>
+<code>TFR</code>
+<means>Tone(Front)</means>
+</command>
+<command>
+<code>TFW</code>
+<means>Tone(Front Wide)</means>
+</command>
+<command>
+<code>TFH</code>
+<means>Tone(Front High)</means>
+</command>
+<command>
+<code>TCT</code>
+<means>Tone(Center)</means>
+</command>
+<command>
+<code>TSR</code>
+<means>Tone(Surround)</means>
+</command>
+<command>
+<code>TSB</code>
+<means>Tone(Surround Back)</means>
+</command>
+<command>
+<code>TSW</code>
+<means>Tone(Subwoofer)</means>
+</command>
+<command>
+<code>SLP</code>
+<means>Sleep Set </means>
+</command>
+<command>
+<code>SLC</code>
+<means>Speaker Level Calibration </means>
+</command>
+<command>
+<code>SWL</code>
+<means>Subwoofer (temporary) Level </means>
+</command>
+<command>
+<code>CTL</code>
+<means>Center (temporary) Level </means>
+</command>
+<command>
+<code>DIF</code>
+<means>Display Information </means>
+</command>
+<command>
+<code>DIF</code>
+<means>Display Mode </means>
+</command>
+<command>
+<code>DIM</code>
+<means>Dimmer Level </means>
+</command>
+<command>
+<code>OSD</code>
+<means>Setup Operation </means>
+</command>
+<command>
+<code>MEM</code>
+<means>Memory Setup </means>
+</command>
+<command>
+<code>IFA</code>
+<means>Audio Infomation</means>
+</command>
+<command>
+<code>IFV</code>
+<means>Video Infomation</means>
+</command>
+<command>
+<code>SLI</code>
+<means>Input Selector </means>
+</command>
+<command>
+<code>SLR</code>
+<means>RECOUT Selector </means>
+</command>
+<command>
+<code>SLA</code>
+<means>Audio Selector </means>
+</command>
+<command>
+<code>TGA</code>
+<means>12V Trigger A </means>
+</command>
+<command>
+<code>TGB</code>
+<means>12V Trigger B </means>
+</command>
+<command>
+<code>TGC</code>
+<means>12V Trigger C </means>
+</command>
+<command>
+<code>VOS</code>
+<means>Video Output Selector (Japanese Model Only)</means>
+</command>
+<command>
+<code>HDO</code>
+<means>HDMI Output Selector</means>
+</command>
+<command>
+<code>HAO</code>
+<means>HDMIAudio Out</means>
+</command>
+<command>
+<code>RES</code>
+<means>Monitor Out Resolution</means>
+</command>
+<command>
+<code>ISF</code>
+<means>ISF Mode</means>
+</command>
+<command>
+<code>VWM</code>
+<means>Video Wide Mode</means>
+</command>
+<command>
+<code>VPM</code>
+<means>VideoPicture Mode</means>
+</command>
+<command>
+<code>LMD</code>
+<means>Listening Mode</means>
+</command>
+<command>
+<code>LTN</code>
+<means>Late Night </means>
+</command>
+<command>
+<code>RAS</code>
+<means>Re</means>
+</command>
+<command>
+<code>RAS</code>
+<means>Re</means>
+</command>
+<command>
+<code>RAS</code>
+<means>Cinema Filter </means>
+</command>
+<command>
+<code>ADY</code>
+<means>Audyssey 2EQ/MultEQ/MultEQ XT</means>
+</command>
+<command>
+<code>ADQ</code>
+<means>Audyssey Dynamic EQ</means>
+</command>
+<command>
+<code>ADV</code>
+<means>Audyssey Dynamic Volume</means>
+</command>
+<command>
+<code>DVL</code>
+<means>Dolby Volume</means>
+</command>
+<command>
+<code>MOT</code>
+<means>Music Optimizer</means>
+</command>
+<command>
+<code>TUN</code>
+<means>Tuning (Include Tuner Pack Model Only)</means>
+</command>
+<command>
+<code>PRS</code>
+<means>Preset (Include Tuner Pack Model Only)</means>
+</command>
+<command>
+<code>PRM</code>
+<means>Preset Memory (Include Tuner Pack Model Only)</means>
+</command>
+<command>
+<code>RDS</code>
+<means>RDS Information (RDS Model Only)</means>
+</command>
+<command>
+<code>PTS</code>
+<means>PTY Scan (RDS Model Only)</means>
+</command>
+<command>
+<code>TPS</code>
+<means>TP Scan (RDS Model Only)</means>
+</command>
+<command>
+<code>XCN</code>
+<means>XM Channel Name Info (XM Model Only)</means>
+</command>
+<command>
+<code>XAT</code>
+<means>XM Artist Name Info (XM Model Only)</means>
+</command>
+<command>
+<code>XTI</code>
+<means>XM Title Info (XM Model Only)</means>
+</command>
+<command>
+<code>XCH</code>
+<means>XM Channel Number (XM Model Only)</means>
+</command>
+<command>
+<code>XCT</code>
+<means>XM Category (XM Model Only)</means>
+</command>
+<command>
+<code>SCN</code>
+<means>SIRIUS Channel Name Info (SIRIUS Model Only)</means>
+</command>
+<command>
+<code>SAT</code>
+<means>SIRIUS Artist Name Info (SIRIUS Model Only)</means>
+</command>
+<command>
+<code>STI</code>
+<means>SIRIUS Title Info (SIRIUS Model Only)</means>
+</command>
+<command>
+<code>SCH</code>
+<means>SIRIUS Channel Number (SIRIUS Model Only)</means>
+</command>
+<command>
+<code>SCT</code>
+<means>SIRIUS Category (SIRIUS Model Only)</means>
+</command>
+<command>
+<code>SLK</code>
+<means>SIRIUS Parental Lock (SIRIUS Model Only)</means>
+</command>
+<command>
+<code>HAT</code>
+<means>HD Radio Artist Name Info (HD Radio Model Only)</means>
+</command>
+<command>
+<code>HCN</code>
+<means>HD Radio Channel Name Info (HD Radio Model Only)</means>
+</command>
+<command>
+<code>HTI</code>
+<means>HD Radio Title Info (HD Radio Model Only)</means>
+</command>
+<command>
+<code>HDS</code>
+<means>HD Radio Detail Info (HD Radio Model Only)</means>
+</command>
+<command>
+<code>HPR</code>
+<means>HD Radio Channel Program (HD Radio Model Only)</means>
+</command>
+<command>
+<code>HBL</code>
+<means>HD Radio Blend Mode (HD Radio Model Only)</means>
+</command>
+<command>
+<code>HTS</code>
+<means>HD Radio Tuner Status (HD Radio Model Only)</means>
+</command>
+<command>
+<code>NTC</code>
+<means>Net</means>
+</command>
+<command>
+<code>NTC</code>
+<means>Network/USB Operation (Network Model Only after TX</means>
+</command>
+<command>
+<code>NAT</code>
+<means>NET/USBArtist Name Info</means>
+</command>
+<command>
+<code>NAL</code>
+<means>NET/USB Album Name Info</means>
+</command>
+<command>
+<code>NTI</code>
+<means>NET/USB Title Name</means>
+</command>
+<command>
+<code>NTM</code>
+<means>NET/USB Time Info</means>
+</command>
+<command>
+<code>NTR</code>
+<means>NET/USB Track Info</means>
+</command>
+<command>
+<code>NST</code>
+<means>NET/USB Play Status</means>
+</command>
+<command>
+<code>NPR</code>
+<means>Internet Radio Preset</means>
+</command>
+<command>
+<code>NLS</code>
+<means>NET/USB List Info</means>
+</command>
+<command>
+<code>NJA</code>
+<means>NET/USB Jacket Art (When Jacket Art is available and Output for Network Control Only)</means>
+</command>
+<command>
+<code>NSV</code>
+<means>NET Service(for Network Control Only)</means>
+</command>
+<command>
+<code>NKY</code>
+<means>NET Keyboard(for Network Control Only)</means>
+</command>
+<command>
+<code>NPU</code>
+<means>NET Popup Message(for Network Control Only)</means>
+</command>
+<command>
+<code>NMD</code>
+<means>iPod Mode Change (with USB Connection Only)</means>
+</command>
+<command>
+<code>CCD</code>
+<means>CD Player Operation </means>
+</command>
+<command>
+<code>CT1</code>
+<means>TAPE1(A) Operation </means>
+</command>
+<command>
+<code>CT2</code>
+<means>TAPE2(B) Operation </means>
+</command>
+<command>
+<code>CEQ</code>
+<means>Graphics Equalizer Operation </means>
+</command>
+<command>
+<code>CDT</code>
+<means>DAT Recorder Operation </means>
+</command>
+<command>
+<code>CDV</code>
+<means>DVD Player Operation (via RIHD only after TX</means>
+</command>
+<command>
+<code>CMD</code>
+<means>MD Recorder Operation </means>
+</command>
+<command>
+<code>CCR</code>
+<means>CD</means>
+</command>
+<command>
+<code>CPT</code>
+<means>Universal PORT Operation </means>
+</command>
+<command>
+<code>IAT</code>
+<means>iPod Artist Name Info (Universal Port Dock Only)</means>
+</command>
+<command>
+<code>IAL</code>
+<means>iPod Album Name Info (Universal Port Dock Only)</means>
+</command>
+<command>
+<code>ITI</code>
+<means>iPod Title Name (Universal Port Dock Only)</means>
+</command>
+<command>
+<code>ITM</code>
+<means>iPod Time Info (Universal Port Dock Only)</means>
+</command>
+<command>
+<code>ITR</code>
+<means>iPod Track Info (Universal Port Dock Only)</means>
+</command>
+<command>
+<code>IST</code>
+<means>iPod Play Status (Universal Port Dock Only)</means>
+</command>
+<command>
+<code>ILS</code>
+<means>iPod List Info (Universal Port Dock Extend Mode Only)</means>
+</command>
+<command>
+<code>IMD</code>
+<means>iPod Mode Change (Universal Port Dock Only)</means>
+</command>
+<command>
+<code>UTN</code>
+<means>Tuning (Universal Port Dock Only)</means>
+</command>
+<command>
+<code>UPR</code>
+<means>Preset (Universal Port Dock Only)</means>
+</command>
+<command>
+<code>UPM</code>
+<means>Preset Memory (Universal Port Dock Only)</means>
+</command>
+<command>
+<code>UHP</code>
+<means>HD Radio Channel Program (Universal Port Dock Only)</means>
+</command>
+<command>
+<code>UHB</code>
+<means>HD Radio Blend Mode (Universal Port Dock Only)</means>
+</command>
+<command>
+<code>UHA</code>
+<means>HD Radio Artist Name Info (Universal Port Dock Only)</means>
+</command>
+<command>
+<code>UHC</code>
+<means>HD Radio Channel Name Info (Universal Port Dock Only)</means>
+</command>
+<command>
+<code>UHT</code>
+<means>HD Radio Title Info (Universal Port Dock Only)</means>
+</command>
+<command>
+<code>UHD</code>
+<means>HD Radio Detail Info (Universal Port Dock Only)</means>
+</command>
+<command>
+<code>UHS</code>
+<means>HD Radio Tuner Status (Universal Port Dock Only)</means>
+</command>
+<command>
+<code>UPR</code>
+<means>DAB Preset (Universal Port Dock Only)</means>
+</command>
+<command>
+<code>UPM</code>
+<means>Preset Memory (Universal Port Dock Only)</means>
+</command>
+<command>
+<code>UDS</code>
+<means>DAB Sation Name (Universal Port Dock Only)</means>
+</command>
+<command>
+<code>UDD</code>
+<means>DAB Display Info (Universal Port Dock Only)</means>
+</command>
+</commands>

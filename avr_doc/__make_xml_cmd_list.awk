@@ -28,7 +28,7 @@ BEGIN {
 #	    print cmd0,$1,$2,NR;
 #            print "<subcode>" $1 "</subcode>"
 #	    print "<means>" $2 "</means>"
-    }
+      }
       else  next
     }
 } 

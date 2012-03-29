@@ -1,16 +1,18 @@
-import QmlProject 1.0
+import QmlProject 1.1
 
 Project {
+    mainFile: "main.qml"
+
     /* Include .qml, .js, and image files from current directory and subdirectories */
     QmlFiles {
-        directory: "onkyoapp/qml/onkyoapp"
+        directory: "."
     }
     JavaScriptFiles {
-        directory: "onkyoapp/qml/onkyoapp/contents"
+        directory: "contents"
     }
     ImageFiles {
-        directory: "onkyoapp/qmlonkyoapp/contents"
+        directory: "contents/images"
     }
     /* List of plugin directories passed to QML runtime */
-    importPaths: [ "onkyo_client" ]
+    importPaths: [ "/home/vladislav/development" ]
 }

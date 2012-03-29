@@ -22,7 +22,7 @@ QString IscpMessage::toString() const
 {
     QString tmp;
     if( message_size() > 5 )
-        tmp = QString::fromUtf8( message()+2, message_size() ).simplified().replace("\0x1A","");
+        tmp = QString::fromUtf8( message()+2, message_size()-2 ).simplified().replace("\0x1A","");
     return  tmp;
 }
 

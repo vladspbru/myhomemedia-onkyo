@@ -7,7 +7,7 @@ Rectangle {
     width: 400; height: 600
 
     property Onkyo device : Onkyo {
-        addr:"10.0.2.15"
+//        addr:"10.0.2.15"
         port: 60128
         onConnectChanged: {
             console.debug("connect changed = " + connected);
@@ -15,8 +15,6 @@ Rectangle {
                 device.query_all_parameters_state();
         }
     }
-
-    property bool connected: device.connected
 
     XmlListModel {
         id:cmdModel
@@ -53,7 +51,9 @@ Rectangle {
         anchors.topMargin: 0
         anchors.right: parent.right
         anchors.rightMargin: 0
-        on: false
+        height: 70; width: 70;
+        on: device.connected
+        onClicked: device.connected = device.connected ? false : true;
     }
 
     Component.onCompleted: {

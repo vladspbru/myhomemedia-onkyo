@@ -44,15 +44,16 @@ private slots:
 
 private:
 
-    QString addr();
-    void setAddr(const QString& addr);
-    int  port();
-    void setPort(int p);
+    QString addr() const { return addr_; }
+    void setAddr(const QString& addr) { addr_ = addr; }
 
-    bool getConnected();
-    void removeLink();
-    void createLink();
-    void setConnected(bool con);
+    int  port() const { return port_; }
+    void setPort(int p) {  port_ = p; }
+
+    bool getConnected() const;
+    void setConnected(bool conn){ connect_(conn); }
+
+    void connect_(bool conn);
 
     QString addr_;
     int     port_;

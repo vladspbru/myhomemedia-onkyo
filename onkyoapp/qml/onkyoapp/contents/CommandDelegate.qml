@@ -4,11 +4,10 @@ import vx.home.qmlcomponents 1.0
 
 Component{
     Item {
-        width: parent.width; height: 44
-
         id: container
-        property OnkyoParameter parameter;
+        property OnkyoParameter parameter: window.device.getParameter( code )
 
+        width: parent.width; height: 44
 
         Rectangle {
             id: rectangle1
@@ -81,8 +80,10 @@ Component{
             }
         }
         Component.onCompleted: {
-            console.log( "create parameter: " + code  )
-            container.parameter = window.device.getParameter( code )
+            if(!container.parameter.value)
+                if(window.device.connected)
+                    container.parameter.query_state()
+            console.log( "create parameter: " + code + ",  val: " + container.parameter.value  )
         }
     }
 }

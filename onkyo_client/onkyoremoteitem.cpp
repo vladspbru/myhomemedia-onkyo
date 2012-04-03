@@ -5,7 +5,7 @@
 #include "onkyoclient.h"
 
 OnkyoRemoteItem::OnkyoRemoteItem(QDeclarativeItem *parent):
-  QObject(parent)
+    QObject(parent)
 {
 }
 
@@ -13,58 +13,39 @@ OnkyoRemoteItem::~OnkyoRemoteItem()
 {
 }
 
-QString OnkyoRemoteItem::addr()
+bool OnkyoRemoteItem::getConnected() const
 {
-    return addr_;
-}
-void OnkyoRemoteItem::setAddr(const QString& addr)
-{
-    addr_ = addr;
-    removeLink();
+    return ( !onkyo_.isNull() && onkyo_->is_connected() );
 }
 
-int OnkyoRemoteItem::port()
+void OnkyoRemoteItem::connect_(bool conn)
 {
-    return port_;
-}
+    bool linked_ = getConnected();
+    if( linked_ != conn ){
 
-void OnkyoRemoteItem::setPort(int p)
-{
-    port_ = p;
-    removeLink();
-}
-
-void OnkyoRemoteItem::removeLink()
-{
-    if(! onkyo_.isNull() ){
-        this->disconnect(onkyo_.data());
-        onkyo_.reset();
+        if(conn){
+            onkyo_.reset( new OnkyoClient() );
+            connect(onkyo_.data(), SIGNAL( newStatus(QString) ), this, SLOT(status_(QString)) );
+            connect(onkyo_.data(), SIGNAL( error(QString)), this, SLOT(error_(QString)) );
+            if(addr_.isEmpty())
+                onkyo_->init();
+            else {
+                DeviceInfo d;
+                d.addr = QHostAddress(addr_);
+                d.port = port_;
+                onkyo_->init(d);
+            }
+            onkyo_->setConnected(true);
+        }
+        else {//make diskonnect
+            if(! onkyo_.isNull() ){
+                this->disconnect(onkyo_.data());
+                onkyo_.reset();
+            }
+        }
+        emit connectChanged();
     }
-}
 
-void OnkyoRemoteItem::createLink()
-{
-    onkyo_.reset( new OnkyoClient() );
-    connect(onkyo_.data(), SIGNAL( newStatus(QString) ), this, SLOT(status_(QString)) );
-    connect(onkyo_.data(), SIGNAL( error(QString)), this, SLOT(error_(QString)) );
-
-    if(addr_.isEmpty())
-        onkyo_->init();
-    else {
-        DeviceInfo d;
-        d.addr = QHostAddress(addr_);
-        d.port = port_;
-        onkyo_->init(d);
-    }
-    onkyo_->setConnected(true);
-}
-
-void OnkyoRemoteItem::setConnected(bool con)
-{
-    if(con)
-        createLink();
-    else
-        removeLink();
 }
 
 void OnkyoRemoteItem::status_(const QString &str)
@@ -85,25 +66,23 @@ void OnkyoRemoteItem::error_(const QString &str)
     qDebug() << str.toLocal8Bit();
 }
 
-bool OnkyoRemoteItem::getConnected()
-{
-    return ( !onkyo_.isNull() && onkyo_->is_connected() );
-}
-
 void OnkyoRemoteItem::cmd(const QString &str)
 {
-    if( onkyo_.isNull() )
-        createLink();
-    onkyo_->request(str);
+    if( getConnected()==false )
+        connect_(true);
+
+    if( getConnected() )
+        onkyo_->request(str);
 }
 
 OnkyoParameterItem* OnkyoRemoteItem::getParameter(const QString& name)
 {
     OnkyoParameterItem* param=0;
     foreach(OnkyoParameterItem* p, params_){
-        if( p->nik() == name )
+        if( p->nik() == name ){
             param = p;
             break;
+        }
     }
 
     if( param == 0 ){
@@ -132,7 +111,7 @@ void OnkyoRemoteItem::append_param(QDeclarativeListProperty<OnkyoParameterItem> 
 void OnkyoRemoteItem::query_all_parameters_state()
 {
     foreach(OnkyoParameterItem* p, params_){
-            p->query_state();
+        p->query_state();
     }
 }
 

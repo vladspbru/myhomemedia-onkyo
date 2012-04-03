@@ -1,10 +1,12 @@
+QT += declarative network
+
 # Add more folders to ship with the application, here
 folder_01.source = qml/onkyoapp
 folder_01.target = qml
 DEPLOYMENTFOLDERS = folder_01
 
 # Additional import path used to resolve QML modules in Creator's code model
-QML_IMPORT_PATH = /home/vladislav/development
+#QML_IMPORT_PATH =
 
 symbian:TARGET.UID3 = 0xE508CE82
 
@@ -31,6 +33,11 @@ symbian:TARGET.CAPABILITY += NetworkServices
 
 # The .cpp file which was generated for your project. Feel free to hack it.
 SOURCES += main.cpp
+
+#//static linking
+INCLUDEPATH += ../onkyo_client
+include(../onkyo_client/onkyo_client.pri)
+
 
 # Please do not modify the following two lines. Required for deployment.
 include(qmlapplicationviewer/qmlapplicationviewer.pri)

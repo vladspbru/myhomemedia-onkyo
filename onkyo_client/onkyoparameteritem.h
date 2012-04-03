@@ -20,13 +20,13 @@ public:
     QString value() { return value_; }
     void setValue(const QString& v);
 
-    Q_INVOKABLE void query(const QString& sub);
+    Q_INVOKABLE void cmd(const QString& sub);
 
 signals:
     void valueChanged();
 
 public slots:
-    void query_state() { query("QSTN"); }
+    void query_state() { cmd("QSTN"); }
 
 
 protected:

@@ -1,11 +1,17 @@
 import QtQuick 1.1
+import vx.home.qmlcomponents 1.0
 
 
 Component{
-
     Item {
         width: parent.width; height: 44
+
+        id: container
+        property OnkyoParameter parameter;
+
+
         Rectangle {
+            id: rectangle1
             width: parent.width
             height: 40
             clip: true
@@ -27,35 +33,56 @@ Component{
 
             Column {
                 id: column1
-                anchors.fill: parent
-                anchors.bottomMargin: 4
-                anchors.topMargin: 4
-                anchors.rightMargin: 8
-                anchors.leftMargin: 8
-                spacing: 4
-                Text {
-                    id: txt1
-                    text: section
-                    color: "white"
-                    font.bold: true
-                    font.pointSize: 10
-                    font.underline: true
+                anchors { fill: parent; leftMargin: 8; topMargin: 4; rightMargin: 8; bottomMargin: 4  }
+                spacing: 2
+
+                Row{
+                    id: row1
+                    spacing: 12
+                    Text {
+                        id: txt1
+                        text: code
+                        color: "white"
+                        font.bold: true
+                        font.pointSize: 10
+                        font.underline: true
+                    }
+                    Text {
+                        id: txt2
+                        text: title
+                        color: "white"
+                        font.bold: true
+                        font.pointSize: 10
+                    }
+
                 }
-                Text {
-                    text: window.device.takeParameter("PWR").value
-                    anchors.left: txt1.right
-                    color: "white"
-                    font.pointSize: 8
+
+                Row{
+                    id: row2
+                    height: 15
+                    CommandIndicator{
+                        height: parent.height
+                        width: height
+                        fillMode: Image.Stretch
+                        onClicked: {
+                            console.debug( code + subcode + " clicked" )
+                            container.parameter.cmd( subcode )
+                        }
+                    }
+
+                    Text {
+                        text: container.parameter.value
+                        color: "white"
+                        font.pointSize: 8
+                    }
                 }
 
 
             }
-            MouseArea{
-                anchors.fill: parent
-                onClicked: {
-                }
-
-            }
+        }
+        Component.onCompleted: {
+            console.log( "create parameter: " + code  )
+            container.parameter = window.device.getParameter( code )
         }
     }
 }

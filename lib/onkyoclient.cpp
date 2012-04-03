@@ -110,3 +110,4 @@ void OnkyoClient::onReadyRead()
     emit newStatus( curr_status_->toString() );
     curr_status_.reset(0);
 }
+

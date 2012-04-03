@@ -20,17 +20,19 @@ BEGIN {
     }
     else {
       if ( $3 ~ /Yes/ ) {  
+	 if ( $1 ~ /QSTN/ ) {  
 	    gsub("\"", "", $1)
 	    gsub("&", "and", $2)
 	    gsub("<", "", $2)
 	    gsub(">", "", $2)
-#	    print cmd0,$1,$2,NR;
+# 	    print cmd0,comment0,$1,$2,NR;
 	    print "<command>"
 	    print "<title>" comment0 "</title>"
 	    print "<code>" cmd0 "</code>"
             print "<subcode>" $1 "</subcode>"
 	    print "<means>" $2 "</means>"
 	    print "</command>"
+	 }   
       }
       else  next
     }

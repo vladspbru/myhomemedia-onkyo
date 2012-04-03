@@ -5,12 +5,8 @@
 #include "onkyoclient.h"
 
 OnkyoRemoteItem::OnkyoRemoteItem(QDeclarativeItem *parent):
-    QDeclarativeItem(parent)
+  QObject(parent)
 {
-    // By default, QDeclarativeItem does not draw anything. If you subclass
-    // QDeclarativeItem to create a visual item, you will need to uncomment the
-    // following line:
-    // setFlag(ItemHasNoContents, false);
 }
 
 OnkyoRemoteItem::~OnkyoRemoteItem()
@@ -63,6 +59,14 @@ void OnkyoRemoteItem::createLink()
     onkyo_->setConnected(true);
 }
 
+void OnkyoRemoteItem::setConnected(bool con)
+{
+    if(con)
+        createLink();
+    else
+        removeLink();
+}
+
 void OnkyoRemoteItem::status_(const QString &str)
 {
     if( str.isEmpty() )
@@ -93,7 +97,7 @@ void OnkyoRemoteItem::cmd(const QString &str)
     onkyo_->request(str);
 }
 
-OnkyoParameterItem* OnkyoRemoteItem::takeParameter(const QString& name)
+OnkyoParameterItem* OnkyoRemoteItem::getParameter(const QString& name)
 {
     OnkyoParameterItem* param=0;
     foreach(OnkyoParameterItem* p, params_){
@@ -103,10 +107,10 @@ OnkyoParameterItem* OnkyoRemoteItem::takeParameter(const QString& name)
     }
 
     if( param == 0 ){
-        OnkyoParameterItem* param = new OnkyoParameterItem(this);
+        param = new OnkyoParameterItem(this);
         param->setNik(name);
-        params_.push_back(param);
-        emit parametersChanged();
+        params_.append(param);
+        parametersChanged();
     }
     return param;
 }
@@ -121,11 +125,11 @@ void OnkyoRemoteItem::append_param(QDeclarativeListProperty<OnkyoParameterItem> 
     OnkyoRemoteItem *onkyo = qobject_cast<OnkyoRemoteItem *>(list->object);
     if (onkyo) {
         onkyo->params_.append(par);
-        emit onkyo->parametersChanged();
+        onkyo->parametersChanged();
     }
 }
 
-void OnkyoRemoteItem::query_parameters_state()
+void OnkyoRemoteItem::query_all_parameters_state()
 {
     foreach(OnkyoParameterItem* p, params_){
             p->query_state();

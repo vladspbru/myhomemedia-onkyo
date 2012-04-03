@@ -8,7 +8,7 @@ OnkyoParameterItem::OnkyoParameterItem(QObject *parent) :
 }
 
 
-void OnkyoParameterItem::query(const QString& subcmd)
+void OnkyoParameterItem::cmd(const QString& subcmd)
 {
     OnkyoRemoteItem* onkyo = dynamic_cast<OnkyoRemoteItem*>( this->parent() );
     if(onkyo){
@@ -16,7 +16,7 @@ void OnkyoParameterItem::query(const QString& subcmd)
         qDebug() << "Cmd: nik="<< nik_<< ", subcmd=" << subcmd;
     }
     else
-        qDebug() << "No Parent! OnkyoParameterItem : nik="<< nik_<< ", subcmd=" << subcmd;
+        qDebug() << "No ONKYO, No Parent! OnkyoParameterItem : nik="<< nik_<< ", subcmd=" << subcmd;
 
 }
 

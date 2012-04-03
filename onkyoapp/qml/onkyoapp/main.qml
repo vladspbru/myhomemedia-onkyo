@@ -4,14 +4,16 @@ import "contents"
 
 Rectangle {
     id:window
-    width: 500; height: 400
+    width: 400; height: 600
 
-    property variant device : Onkyo {
-            addr:"10.0.2.15"
-            port: 60128
-            onConnectChanged: {
-                console.debug("connect changed = " + connected)
-            }
+    property Onkyo device : Onkyo {
+        addr:"10.0.2.15"
+        port: 60128
+        onConnectChanged: {
+            console.debug("connect changed = " + connected);
+            if(connected)
+                device.query_all_parameters_state();
+        }
     }
 
     property bool connected: device.connected
@@ -27,42 +29,16 @@ Rectangle {
     }
 
     CommandDelegate{
-        id: sectionHeading
-    }
-    SubCommandDelegate{
         id: cmdDelegate
     }
 
-    Component {
-        id: highlight
-        Rectangle {
-            color: "lightsteelblue"; radius: 3
-            y: lisView.currentItem.y
-            width: lisView.currentItem.width; height: lisView.currentItem.height
-            Behavior on y {
-                SpringAnimation {
-                    spring: 3
-                    damping: 0.2
-                }
-            }
-        }
-    }
 
     ListView{
         id: lisView
         anchors.fill: parent
         anchors.margins: 4
-        model: cmdModel
-        //        model: CommandsModel{}
-        delegate:  cmdDelegate
-
-        section.property: "title"
-        section.criteria: ViewSection.FullString
-        section.delegate: sectionHeading
-
-        highlight: highlight
-        highlightFollowsCurrentItem: false
-        focus: true
+        model: cmdModel      //model: CommandsModel{}
+        delegate: cmdDelegate
     }
 
     ScrollBar{
@@ -72,4 +48,15 @@ Rectangle {
         anchors.right: lisView.right
     }
 
+    LinkIndicator{
+        anchors.top: parent.top
+        anchors.topMargin: 0
+        anchors.right: parent.right
+        anchors.rightMargin: 0
+        on: false
+    }
+
+    Component.onCompleted: {
+        device.connected=true;
+    }
 }

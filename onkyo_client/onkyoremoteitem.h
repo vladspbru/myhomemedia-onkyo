@@ -9,14 +9,14 @@
 class OnkyoClient;
 class OnkyoParameterItem;
 
-class OnkyoRemoteItem : public QDeclarativeItem
+class OnkyoRemoteItem : public QObject
 {
     Q_OBJECT
     Q_DISABLE_COPY(OnkyoRemoteItem)
 
     Q_PROPERTY(QString addr READ addr WRITE setAddr)
     Q_PROPERTY(int     port READ port WRITE setPort)
-    Q_PROPERTY(bool    connected  READ getConnected  NOTIFY connectChanged)
+    Q_PROPERTY(bool    connected  READ getConnected WRITE setConnected NOTIFY connectChanged)
 
     Q_PROPERTY(QDeclarativeListProperty<OnkyoParameterItem> parameters READ parameters NOTIFY parametersChanged)
     Q_CLASSINFO("DefaultProperty", "parameters")
@@ -27,9 +27,9 @@ public:
     ~OnkyoRemoteItem();
 
     Q_INVOKABLE void cmd(const QString& str);
-    Q_INVOKABLE void query_parameters_state();
+    Q_INVOKABLE void query_all_parameters_state();
 
-    Q_INVOKABLE OnkyoParameterItem* takeParameter(const QString& name);
+    Q_INVOKABLE OnkyoParameterItem* getParameter(const QString& name);
 
     QDeclarativeListProperty<OnkyoParameterItem> parameters();
 
@@ -52,6 +52,7 @@ private:
     bool getConnected();
     void removeLink();
     void createLink();
+    void setConnected(bool con);
 
     QString addr_;
     int     port_;

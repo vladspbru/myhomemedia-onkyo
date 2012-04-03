@@ -21,12 +21,28 @@ such as volume and tone control and input selection for Onkyo's Receiver
           onkyocli -t -1 -H 192.168.1.11    spy device command
 
 
-
-   // not implemented now
-    onkyo_client - Qt pugin
+    onkyo_client - QMLQt pugin
     ------------
+    QML interface example:
+    Onkyo {
+        addr:"10.0.2.15"
+        port:60128
+        onConnectChanged:{
+            console.log("Connect=" + connected)
+        }
+
+        parameters: [
+            OnkyoParameter {
+                nik: "PWR"
+                value: "none"
+                onValueChanged: {
+                    console.log( "value changed=" + value )
+                }
+            }
+        ]
+    }
 
 
-    onkyoapp - QML App
+    onkyoapp -  Application with TX-NR609 command list implemented by QML
     ------------
 
